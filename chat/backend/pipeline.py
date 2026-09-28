@@ -14,6 +14,7 @@ onto this project's alerts schema and SQLite.
          answer_question()/answer_question_stream() this replaces)
 """
 import json
+import os
 import re
 import time
 from datetime import datetime, timezone
@@ -32,6 +33,12 @@ from .schema_prompt import ANSWER_SYSTEM_PROMPT, QUERY_SYSTEM_PROMPT
 
 
 def now():
+    # Test-only override for benchmarking against a dataset with a
+    # fixed data cutoff -- unset in normal operation, real wall clock
+    # is used. Never read outside this function.
+    override = os.environ.get("FQC_FAKE_NOW")
+    if override:
+        return datetime.fromisoformat(override)
     return datetime.now(timezone.utc).replace(tzinfo=None)
 
 
@@ -66,19 +73,32 @@ _OFF_TOPIC = re.compile(
 # any actual destructive SQL from running, but that's a safety net against
 # data loss, not a substitute for correctly refusing the request itself.
 _INJECTION_RE = re.compile(
-    r"\bignore\s+(all\s+|the\s+|previous\s+)*(previous\s+|prior\s+|above\s+)?instructions\b|"
+    r"\bignore\s+(all\s+|the\s+|previous\s+)*(previous\s+|prior\s+)?instructions\b|"
     r"\bsystem\s+prompt\b|\byour\s+(instructions|rules|guidelines)\b|"
     r"\bpretend\s+(you|to)\b|\byou\s+are\s+now\b|\bdisregard\s+(all\s+|the\s+)?(previous\s+|prior\s+)?"
-    r"instructions\b|\brepeat\s+the\s+text\s+above\b|\breveal\s+your\b|\bdelete\s+(all|every)\b|"
-    r"\bdrop\s+(table|database)\b", re.I)
+    r"instructions\b|\brepeat\s+the\s+text\s+above\b|\breveal\s+your\b|"
+    r"\b(delete|remove)\s+(all|every)\b|\bdrop\s+(table|database)\b|"
+    r"\binsert\s+(a\s+|an\s+)?(fake|dummy|test)\s+\w*\s*record\b", re.I)
+
+# Off-domain requests phrased as an imperative/polite ask (not a
+# wh-question, so _OFF_TOPIC below never sees them) that happen to
+# mention a generic time word ("today") or the word "alert" and were
+# therefore slipping past _FQC_HINT straight into data_query: weather,
+# creative writing, credentials, admin actions, translation requests.
+_OFF_DOMAIN_RE = re.compile(
+    r"\bweather\b|\bpoem\b|\b(tell me a\s+)?joke\b|\badmin\s+password\b|"
+    r"\bpassword\b|\bhack\s+into\b|\bshut\s*down\s+the\s+server\b|"
+    r"\bsend\s+(an?\s+)?email\b|\btranslate\b.*\binto\b", re.I)
 
 
 def _classify(question: str, history: list | None = None) -> str:
     q = question.strip()
-    words = re.findall(r"[A-Za-z]{2,}", q)
+    words = re.findall(r"\w{2,}", q, re.UNICODE)
     if GREETING_RE.match(q) and len(words) <= 5:
         return "greeting"
     if _INJECTION_RE.search(q):
+        return "unsupported"
+    if _OFF_DOMAIN_RE.search(q):
         return "unsupported"
     has_hint = bool(_FQC_HINT.search(q))
     in_thread = bool(history) and any(t.get("sql") for t in history[-3:])
@@ -294,7 +314,10 @@ def _resolve(question, history):
                 "computed": {"sentence": rep["answer"], "note": "report composed deterministically"}}
         return plan, rep["result"], stages, intent
 
-    plan = _plan(question, history, stages)
+    try:
+        plan = _plan(question, history, stages)
+    except QueryError:
+        return None, [], stages, "unsupported"
 
     t0 = time.time()
     try:

@@ -14,6 +14,9 @@ MONTHS = {m: i for i, m in enumerate(
      "august", "september", "october", "november", "december"], start=1)}
 MONTHS.update({m[:3]: i for m, i in list(MONTHS.items())})
 
+WEEKDAYS = {"monday": 0, "tuesday": 1, "wednesday": 2, "thursday": 3,
+           "friday": 4, "saturday": 5, "sunday": 6}
+
 # Caps unbounded "last/past N <unit>" phrases (e.g. "the last 999999999
 # days") from overflowing datetime arithmetic (OverflowError: date value
 # out of range). Found while porting this project's own historically-fixed
@@ -102,8 +105,109 @@ def _specific_date(t: str, now: datetime):
     return None
 
 
+def _weekday_occurrence(now: datetime, which: str, wd_name: str) -> datetime:
+    """The datetime (day-start) of this/last/next <weekday>, ISO week
+    (Monday-start, matching _week_start below)."""
+    wd = WEEKDAYS[wd_name]
+    this_week_day = _week_start(now) + timedelta(days=wd)
+    if which in ("last", "previous", "past"):
+        return this_week_day - timedelta(days=7)
+    if which == "next":
+        return this_week_day + timedelta(days=7)
+    return this_week_day
+
+
+def _weekday_range(t: str, now: datetime):
+    """'between this monday and next monday' -- an explicit two-endpoint
+    weekday-name range. Previously unhandled: extract_range() had no
+    weekday-name recognition at all, so the LLM's own (unverified)
+    guess for the date range went uncorrected by this deterministic
+    layer."""
+    wd_alt = "|".join(WEEKDAYS)
+    m = re.search(
+        r"\bbetween\s+(?:(this|last|next|previous|past)\s+)?(" + wd_alt + r")\s+and\s+"
+        r"(?:(this|last|next|previous|past)\s+)?(" + wd_alt + r")\b", t)
+    if not m:
+        return None
+    w1, wd1, w2, wd2 = m.group(1) or "this", m.group(2), m.group(3) or "this", m.group(4)
+    d1 = _weekday_occurrence(now, w1, wd1)
+    d2 = _weekday_occurrence(now, w2, wd2)
+    if d2 > d1:
+        return (d1, d2)
+    return None
+
+
+def _between_dates(t: str, now: datetime):
+    """'between <date1> and <date2>' where both are full specific
+    calendar dates (month-name or ISO form). Previously unhandled:
+    extract_range() fell through to _specific_date(), which only ever
+    matches the FIRST date mention in the text, silently collapsing a
+    stated multi-day range (e.g. 'between march 1 2026 and march 31
+    2026') down to a single day."""
+    date_pat = (r"(?:(" + _MONTH_ALT + r")\.?\s+(\d{1,2})(?:st|nd|rd|th)?,?\s*(\d{4})"
+               r"|(\d{4})-(\d{2})-(\d{2}))")
+    m = re.search(r"\bbetween\s+" + date_pat + r"\s+and\s+" + date_pat + r"\b", t)
+    if not m:
+        return None
+    g = m.groups()
+    try:
+        if g[0]:
+            y1, mo1, d1 = int(g[2]), MONTHS[g[0]], int(g[1])
+        else:
+            y1, mo1, d1 = int(g[3]), int(g[4]), int(g[5])
+        if g[6]:
+            y2, mo2, d2 = int(g[8]), MONTHS[g[6]], int(g[7])
+        else:
+            y2, mo2, d2 = int(g[9]), int(g[10]), int(g[11])
+        s = datetime(y1, mo1, d1)
+        e = datetime(y2, mo2, d2) + timedelta(days=1)
+    except ValueError:
+        return None
+    if e > s:
+        return (s, e)
+    return None
+
+
 def extract_range(text: str, now: datetime):
     t = text.lower().strip()
+
+    weekday_rng = _weekday_range(t, now)
+    if weekday_rng:
+        return weekday_rng
+
+    between_rng = _between_dates(t, now)
+    if between_rng:
+        return between_rng
+
+    qm = re.search(r"\bq([1-4])\s*'?(\d{4})\b", t)
+    if qm:
+        q, y = int(qm.group(1)), int(qm.group(2))
+        s = datetime(y, (q - 1) * 3 + 1, 1)
+        return (s, _add_month(s, 3))
+
+    fm = re.search(
+        r"\b(first|last)\s+day\s+of\s+(?:(this|last|next|previous|past)\s+)?"
+        r"(week|month|year|quarter)\b", t)
+    if fm:
+        bound, which, unit = fm.group(1), fm.group(2) or "this", fm.group(3)
+        direction = -1 if which in ("last", "previous", "past") else (1 if which == "next" else 0)
+        if unit == "week":
+            s = _week_start(now) + timedelta(days=7 * direction)
+            e = s + timedelta(days=7)
+        elif unit == "month":
+            s = _add_month(_month_start(now), direction)
+            e = _add_month(s, 1)
+        elif unit == "year":
+            y = now.year + direction
+            s, e = datetime(y, 1, 1), datetime(y + 1, 1, 1)
+        else:  # quarter
+            q = (now.month - 1) // 3
+            s = datetime(now.year, q * 3 + 1, 1)
+            s = _add_month(s, 3 * direction)
+            e = _add_month(s, 3)
+        if bound == "first":
+            return (s, s + timedelta(days=1))
+        return (e - timedelta(days=1), e)
 
     specific = _specific_date(t, now)
     if specific:

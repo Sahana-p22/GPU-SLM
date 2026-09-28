@@ -239,6 +239,11 @@ def wrong_hour_range(hour_range, sql: str):
     bm = _HOUR_BETWEEN_RE.search(sql)
     if bm:
         got = (int(bm.group(1)), int(bm.group(2)))
+        if start > end:
+            return (f"the question names an overnight hour-of-day RANGE ({start}:00 to {end}:00) "
+                    f"but the SQL says 'hour BETWEEN {got[0]} AND {got[1]}' -- BETWEEN can never "
+                    f"express a wraparound (no hour is both >= {got[0]} and <= {got[1]}). Use "
+                    f"(hour >= {start} OR hour < {end}).")
         want = _correct_between_bounds(start, end)
         if want is not None and got != want:
             return (f"the question names an hour-of-day RANGE ({start}:00 to {end}:00, half-open -- "
@@ -262,6 +267,14 @@ def enforce_hour_range(sql: str, start: int, end: int):
         return _HOUR_CMP_RE.sub(replacement, sql, count=1), True
     bm = _HOUR_BETWEEN_RE.search(sql)
     if bm:
+        if start > end:
+            # An overnight wraparound can never be expressed as a plain
+            # BETWEEN (e.g. "hour BETWEEN 23 AND 1" is always false --
+            # no hour is both >= 23 and <= 1). _correct_between_bounds()
+            # returns None here on purpose (there is no valid BETWEEN
+            # form), which previously caused this branch to skip the
+            # fix entirely and leave the always-false SQL in place.
+            return _HOUR_BETWEEN_RE.sub(replacement, sql, count=1), True
         got = (int(bm.group(1)), int(bm.group(2)))
         want = _correct_between_bounds(start, end)
         if want is not None and got != want:
