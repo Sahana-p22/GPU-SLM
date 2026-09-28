@@ -1,0 +1,3316 @@
+[
+  {
+    "id": "count_today",
+    "category": "counts",
+    "passed": true,
+    "reason": "ok",
+    "final": {
+      "question": "How many alerts happened today?",
+      "intent": "data_query",
+      "pipeline": [
+        {
+          "$match": {
+            "timestamp": {
+              "$gte": "2026-09-25T00:00:00+00:00",
+              "$lt": "2026-09-26T00:00:00+00:00"
+            },
+            "alert_type": {
+              "$ne": "NORMAL_OPERATION"
+            }
+          }
+        },
+        {
+          "$count": "total"
+        }
+      ],
+      "explanation": "How many alerts happened today",
+      "result": [],
+      "row_count": 0,
+      "answer": "No matching data found for that.",
+      "stages": [
+        {
+          "name": "Query generation",
+          "description": "Asked the language model to translate the question into a MongoDB aggregation pipeline (includes JSON-syntax repair and structural validation of the result).",
+          "duration_ms": 726
+        },
+        {
+          "name": "Database execution",
+          "description": "Ran the generated pipeline against MongoDB.",
+          "duration_ms": 1
+        },
+        {
+          "name": "Answer generation",
+          "description": "Asked the language model to phrase the raw result rows as a natural-language answer, then ran deterministic safety checks (no invented values, no wrong superlatives, no dropped data).",
+          "duration_ms": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "count_yesterday_type",
+    "category": "counts",
+    "passed": true,
+    "reason": "ok",
+    "final": {
+      "question": "How many hand touch alerts happened yesterday?",
+      "intent": "data_query",
+      "pipeline": [
+        {
+          "$match": {
+            "alert_type": "HAND_TOUCH",
+            "timestamp": {
+              "$gte": "2026-09-24T00:00:00+00:00",
+              "$lt": "2026-09-25T00:00:00+00:00"
+            }
+          }
+        },
+        {
+          "$count": "total"
+        }
+      ],
+      "explanation": "How many hand touch alerts happened yesterday",
+      "result": [
+        {
+          "total": 29
+        }
+      ],
+      "row_count": 1,
+      "answer": "There were 29 hand touch alerts recorded yesterday.",
+      "stages": [
+        {
+          "name": "Query generation",
+          "description": "Asked the language model to translate the question into a MongoDB aggregation pipeline (includes JSON-syntax repair and structural validation of the result).",
+          "duration_ms": 804
+        },
+        {
+          "name": "Database execution",
+          "description": "Ran the generated pipeline against MongoDB.",
+          "duration_ms": 1
+        },
+        {
+          "name": "Answer generation",
+          "description": "Asked the language model to phrase the raw result rows as a natural-language answer, then ran deterministic safety checks (no invented values, no wrong superlatives, no dropped data).",
+          "duration_ms": 160
+        }
+      ]
+    }
+  },
+  {
+    "id": "count_last_7_days",
+    "category": "counts",
+    "passed": true,
+    "reason": "ok",
+    "final": {
+      "question": "How many alerts happened in the last 7 days?",
+      "intent": "data_query",
+      "pipeline": [
+        {
+          "$match": {
+            "timestamp": {
+              "$gte": "2026-09-19T00:00:00+00:00",
+              "$lt": "2026-09-26T00:00:00+00:00"
+            },
+            "alert_type": {
+              "$ne": "NORMAL_OPERATION"
+            }
+          }
+        },
+        {
+          "$count": "total"
+        }
+      ],
+      "explanation": "How many alerts happened in the last 7 days",
+      "result": [
+        {
+          "total": 853
+        }
+      ],
+      "row_count": 1,
+      "answer": "There were 853 alerts recorded in the last 7 days.",
+      "stages": [
+        {
+          "name": "Query generation",
+          "description": "Asked the language model to translate the question into a MongoDB aggregation pipeline (includes JSON-syntax repair and structural validation of the result).",
+          "duration_ms": 1088
+        },
+        {
+          "name": "Database execution",
+          "description": "Ran the generated pipeline against MongoDB.",
+          "duration_ms": 2
+        },
+        {
+          "name": "Answer generation",
+          "description": "Asked the language model to phrase the raw result rows as a natural-language answer, then ran deterministic safety checks (no invented values, no wrong superlatives, no dropped data).",
+          "duration_ms": 184
+        }
+      ]
+    }
+  },
+  {
+    "id": "count_last_30_days_missing_cleaning",
+    "category": "counts",
+    "passed": true,
+    "reason": "ok",
+    "final": {
+      "question": "How many missing cleaning alerts happened in the last 30 days?",
+      "intent": "data_query",
+      "pipeline": [
+        {
+          "$match": {
+            "alert_type": "MISSING_CLEANING",
+            "timestamp": {
+              "$gte": "2026-08-27T00:00:00+00:00",
+              "$lt": "2026-09-26T00:00:00+00:00"
+            }
+          }
+        },
+        {
+          "$count": "total"
+        }
+      ],
+      "explanation": "How many missing cleaning alerts happened in the last day",
+      "result": [
+        {
+          "total": 694
+        }
+      ],
+      "row_count": 1,
+      "answer": "There were 694 missing cleaning alerts in the last 30 days.",
+      "stages": [
+        {
+          "name": "Query generation",
+          "description": "Asked the language model to translate the question into a MongoDB aggregation pipeline (includes JSON-syntax repair and structural validation of the result).",
+          "duration_ms": 1174
+        },
+        {
+          "name": "Database execution",
+          "description": "Ran the generated pipeline against MongoDB.",
+          "duration_ms": 1
+        },
+        {
+          "name": "Answer generation",
+          "description": "Asked the language model to phrase the raw result rows as a natural-language answer, then ran deterministic safety checks (no invented values, no wrong superlatives, no dropped data).",
+          "duration_ms": 192
+        }
+      ]
+    }
+  },
+  {
+    "id": "count_this_month",
+    "category": "counts",
+    "passed": true,
+    "reason": "ok",
+    "final": {
+      "question": "How many alerts happened this month?",
+      "intent": "data_query",
+      "pipeline": [
+        {
+          "$match": {
+            "timestamp": {
+              "$gte": "2026-09-01T00:00:00+00:00",
+              "$lt": "2026-09-26T00:00:00+00:00"
+            },
+            "alert_type": {
+              "$ne": "NORMAL_OPERATION"
+            }
+          }
+        },
+        {
+          "$count": "total"
+        }
+      ],
+      "explanation": "How many alerts happened this month",
+      "result": [
+        {
+          "total": 4029
+        }
+      ],
+      "row_count": 1,
+      "answer": "There were 4029 alerts recorded this month.",
+      "stages": [
+        {
+          "name": "Query generation",
+          "description": "Asked the language model to translate the question into a MongoDB aggregation pipeline (includes JSON-syntax repair and structural validation of the result).",
+          "duration_ms": 1050
+        },
+        {
+          "name": "Database execution",
+          "description": "Ran the generated pipeline against MongoDB.",
+          "duration_ms": 5
+        },
+        {
+          "name": "Answer generation",
+          "description": "Asked the language model to phrase the raw result rows as a natural-language answer, then ran deterministic safety checks (no invented values, no wrong superlatives, no dropped data).",
+          "duration_ms": 159
+        }
+      ]
+    }
+  },
+  {
+    "id": "avg_all",
+    "category": "averages",
+    "passed": true,
+    "reason": "ok",
+    "final": {
+      "question": "Average inspection time for all alerts",
+      "intent": "data_query",
+      "pipeline": [
+        {
+          "$match": {
+            "alert_type": {
+              "$ne": "NORMAL_OPERATION"
+            }
+          }
+        },
+        {
+          "$group": {
+            "_id": null,
+            "avg_inspection_time": {
+              "$avg": "$inspection_time"
+            }
+          }
+        }
+      ],
+      "explanation": "Average inspection time for all alerts",
+      "result": [
+        {
+          "_id": null,
+          "avg_inspection_time": 11.09
+        }
+      ],
+      "row_count": 1,
+      "answer": "The average inspection time for all alerts was 11.09 seconds.",
+      "stages": [
+        {
+          "name": "Query generation",
+          "description": "Asked the language model to translate the question into a MongoDB aggregation pipeline (includes JSON-syntax repair and structural validation of the result).",
+          "duration_ms": 982
+        },
+        {
+          "name": "Database execution",
+          "description": "Ran the generated pipeline against MongoDB.",
+          "duration_ms": 149
+        },
+        {
+          "name": "Answer generation",
+          "description": "Asked the language model to phrase the raw result rows as a natural-language answer, then ran deterministic safety checks (no invented values, no wrong superlatives, no dropped data).",
+          "duration_ms": 192
+        }
+      ]
+    }
+  },
+  {
+    "id": "avg_fast_inspection",
+    "category": "averages",
+    "passed": true,
+    "reason": "ok",
+    "final": {
+      "question": "Average inspection time for fast inspection alerts",
+      "intent": "data_query",
+      "pipeline": [
+        {
+          "$match": {
+            "alert_type": "FAST_INSPECTION"
+          }
+        },
+        {
+          "$group": {
+            "_id": null,
+            "avg": {
+              "$avg": "$inspection_time"
+            }
+          }
+        }
+      ],
+      "explanation": "Average inspection time for fast inspection alerts",
+      "result": [
+        {
+          "_id": null,
+          "avg": 2.25
+        }
+      ],
+      "row_count": 1,
+      "answer": "The average inspection time for fast inspection alerts was 2.25 seconds.",
+      "stages": [
+        {
+          "name": "Query generation",
+          "description": "Asked the language model to translate the question into a MongoDB aggregation pipeline (includes JSON-syntax repair and structural validation of the result).",
+          "duration_ms": 937
+        },
+        {
+          "name": "Database execution",
+          "description": "Ran the generated pipeline against MongoDB.",
+          "duration_ms": 61
+        },
+        {
+          "name": "Answer generation",
+          "description": "Asked the language model to phrase the raw result rows as a natural-language answer, then ran deterministic safety checks (no invented values, no wrong superlatives, no dropped data).",
+          "duration_ms": 201
+        }
+      ]
+    }
+  },
+  {
+    "id": "avg_hand_touch_last_week",
+    "category": "averages",
+    "passed": true,
+    "reason": "ok",
+    "final": {
+      "question": "What's the average inspection time for hand touch alerts in the last 7 days?",
+      "intent": "data_query",
+      "pipeline": [
+        {
+          "$match": {
+            "alert_type": "HAND_TOUCH",
+            "timestamp": {
+              "$gte": "2026-09-19T00:00:00+00:00",
+              "$lt": "2026-09-26T00:00:00+00:00"
+            }
+          }
+        },
+        {
+          "$group": {
+            "_id": null,
+            "avg_inspection_time": {
+              "$avg": "$inspection_time"
+            }
+          }
+        }
+      ],
+      "explanation": "Average inspection time for hand touch alerts in the last 7 days",
+      "result": [
+        {
+          "_id": null,
+          "avg_inspection_time": 18.18
+        }
+      ],
+      "row_count": 1,
+      "answer": "The average inspection time for hand touch alerts in the last 7 days was approximately 18.18 seconds.",
+      "stages": [
+        {
+          "name": "Query generation",
+          "description": "Asked the language model to translate the question into a MongoDB aggregation pipeline (includes JSON-syntax repair and structural validation of the result).",
+          "duration_ms": 1340
+        },
+        {
+          "name": "Database execution",
+          "description": "Ran the generated pipeline against MongoDB.",
+          "duration_ms": 1
+        },
+        {
+          "name": "Answer generation",
+          "description": "Asked the language model to phrase the raw result rows as a natural-language answer, then ran deterministic safety checks (no invented values, no wrong superlatives, no dropped data).",
+          "duration_ms": 258
+        }
+      ]
+    }
+  },
+  {
+    "id": "breakdown_by_type_all_time",
+    "category": "breakdowns",
+    "passed": true,
+    "reason": "ok",
+    "final": {
+      "question": "Break down all alerts by type",
+      "intent": "data_query",
+      "pipeline": [
+        {
+          "$match": {
+            "alert_type": {
+              "$ne": "NORMAL_OPERATION"
+            }
+          }
+        },
+        {
+          "$group": {
+            "_id": "$alert_type",
+            "count": {
+              "$sum": 1
+            }
+          }
+        },
+        {
+          "$sort": {
+            "count": -1
+          }
+        }
+      ],
+      "explanation": "Break down all alerts by type",
+      "result": [
+        {
+          "_id": "FAST_INSPECTION",
+          "count": 129184
+        },
+        {
+          "_id": "HAND_TOUCH",
+          "count": 109721
+        },
+        {
+          "_id": "MISSING_CLEANING",
+          "count": 69002
+        }
+      ],
+      "row_count": 3,
+      "answer": "The breakdown of alerts by type shows that there were 129,184 fast inspection alerts recorded. There were also 109,721 hand touch alerts and 69,002 missing cleaning alerts.",
+      "stages": [
+        {
+          "name": "Query generation",
+          "description": "Asked the language model to translate the question into a MongoDB aggregation pipeline (includes JSON-syntax repair and structural validation of the result).",
+          "duration_ms": 1119
+        },
+        {
+          "name": "Database execution",
+          "description": "Ran the generated pipeline against MongoDB.",
+          "duration_ms": 45
+        },
+        {
+          "name": "Answer generation",
+          "description": "Asked the language model to phrase the raw result rows as a natural-language answer, then ran deterministic safety checks (no invented values, no wrong superlatives, no dropped data).",
+          "duration_ms": 391
+        }
+      ]
+    }
+  },
+  {
+    "id": "breakdown_by_type_last_week",
+    "category": "breakdowns",
+    "passed": true,
+    "reason": "ok",
+    "final": {
+      "question": "Break down alerts by type for the last 7 days",
+      "intent": "data_query",
+      "pipeline": [
+        {
+          "$match": {
+            "alert_type": {
+              "$ne": "NORMAL_OPERATION"
+            },
+            "timestamp": {
+              "$gte": "2026-09-19T00:00:00+00:00",
+              "$lt": "2026-09-26T00:00:00+00:00"
+            }
+          }
+        },
+        {
+          "$group": {
+            "_id": "$alert_type",
+            "count": {
+              "$sum": 1
+            }
+          }
+        },
+        {
+          "$sort": {
+            "count": -1
+          }
+        }
+      ],
+      "explanation": "Break down alerts by type for the last 7 days",
+      "result": [
+        {
+          "_id": "FAST_INSPECTION",
+          "count": 375
+        },
+        {
+          "_id": "HAND_TOUCH",
+          "count": 316
+        },
+        {
+          "_id": "MISSING_CLEANING",
+          "count": 162
+        }
+      ],
+      "row_count": 3,
+      "answer": "The breakdown of alerts by type for the last 7 days is as follows: There were 375 fast inspection alerts, 316 hand touch alerts, and 162 missing cleaning alerts recorded.",
+      "stages": [
+        {
+          "name": "Query generation",
+          "description": "Asked the language model to translate the question into a MongoDB aggregation pipeline (includes JSON-syntax repair and structural validation of the result).",
+          "duration_ms": 1498
+        },
+        {
+          "name": "Database execution",
+          "description": "Ran the generated pipeline against MongoDB.",
+          "duration_ms": 2
+        },
+        {
+          "name": "Answer generation",
+          "description": "Asked the language model to phrase the raw result rows as a natural-language answer, then ran deterministic safety checks (no invented values, no wrong superlatives, no dropped data).",
+          "duration_ms": 391
+        }
+      ]
+    }
+  },
+  {
+    "id": "breakdown_by_type_this_month",
+    "category": "breakdowns",
+    "passed": true,
+    "reason": "ok",
+    "final": {
+      "question": "Break down this month's alerts by type",
+      "intent": "data_query",
+      "pipeline": [
+        {
+          "$match": {
+            "timestamp": {
+              "$gte": "2026-09-01T00:00:00+00:00",
+              "$lt": "2026-09-26T00:00:00+00:00"
+            },
+            "alert_type": {
+              "$ne": "NORMAL_OPERATION"
+            }
+          }
+        },
+        {
+          "$group": {
+            "_id": "$alert_type",
+            "count": {
+              "$sum": 1
+            }
+          }
+        },
+        {
+          "$sort": {
+            "count": -1
+          }
+        }
+      ],
+      "explanation": "Break down this month's alerts by type",
+      "result": [
+        {
+          "_id": "FAST_INSPECTION",
+          "count": 1940
+        },
+        {
+          "_id": "HAND_TOUCH",
+          "count": 1507
+        },
+        {
+          "_id": "MISSING_CLEANING",
+          "count": 582
+        }
+      ],
+      "row_count": 3,
+      "answer": "This month, there were 1940 fast inspection alerts recorded. There were also 1507 hand touch alerts and 582 missing cleaning alerts.",
+      "stages": [
+        {
+          "name": "Query generation",
+          "description": "Asked the language model to translate the question into a MongoDB aggregation pipeline (includes JSON-syntax repair and structural validation of the result).",
+          "duration_ms": 1295
+        },
+        {
+          "name": "Database execution",
+          "description": "Ran the generated pipeline against MongoDB.",
+          "duration_ms": 5
+        },
+        {
+          "name": "Answer generation",
+          "description": "Asked the language model to phrase the raw result rows as a natural-language answer, then ran deterministic safety checks (no invented values, no wrong superlatives, no dropped data).",
+          "duration_ms": 317
+        }
+      ]
+    }
+  },
+  {
+    "id": "peak_hour_this_week",
+    "category": "hour_filters",
+    "passed": true,
+    "reason": "ok",
+    "final": {
+      "question": "What's the peak hour for fast inspection alerts this week?",
+      "intent": "data_query",
+      "pipeline": [
+        {
+          "$match": {
+            "alert_type": "FAST_INSPECTION",
+            "timestamp": {
+              "$gte": "2026-09-21T00:00:00+00:00",
+              "$lt": "2026-09-26T00:00:00+00:00"
+            }
+          }
+        },
+        {
+          "$group": {
+            "_id": {
+              "hour": {
+                "$hour": "$timestamp"
+              }
+            },
+            "count": {
+              "$sum": 1
+            }
+          }
+        },
+        {
+          "$sort": {
+            "count": -1
+          }
+        },
+        {
+          "$limit": 1
+        }
+      ],
+      "explanation": "Find the hour with most fast inspection alerts this week",
+      "result": [
+        {
+          "count": 18,
+          "hour": 16
+        }
+      ],
+      "row_count": 1,
+      "answer": "18 alerts between 4pm and 5pm.",
+      "stages": [
+        {
+          "name": "Query generation",
+          "description": "Asked the language model to translate the question into a MongoDB aggregation pipeline (includes JSON-syntax repair and structural validation of the result).",
+          "duration_ms": 1532
+        },
+        {
+          "name": "Database execution",
+          "description": "Ran the generated pipeline against MongoDB.",
+          "duration_ms": 1
+        },
+        {
+          "name": "Answer generation",
+          "description": "Asked the language model to phrase the raw result rows as a natural-language answer, then ran deterministic safety checks (no invented values, no wrong superlatives, no dropped data).",
+          "duration_ms": 323
+        }
+      ]
+    }
+  },
+  {
+    "id": "hour_range_2pm_4pm",
+    "category": "hour_filters",
+    "passed": true,
+    "reason": "ok",
+    "final": {
+      "question": "How many alerts happened between 2pm and 4pm in the last 30 days?",
+      "intent": "data_query",
+      "pipeline": [
+        {
+          "$match": {
+            "alert_type": {
+              "$ne": "NORMAL_OPERATION"
+            },
+            "timestamp": {
+              "$gte": "2026-08-27T00:00:00+00:00",
+              "$lt": "2026-09-26T00:00:00+00:00"
+            }
+          }
+        },
+        {
+          "$match": {
+            "hour": {
+              "$gte": 14,
+              "$lt": 16
+            }
+          }
+        },
+        {
+          "$group": {
+            "_id": null,
+            "count": {
+              "$sum": 1
+            }
+          }
+        },
+        {
+          "$sort": {
+            "count": -1
+          }
+        },
+        {
+          "$limit": 200
+        }
+      ],
+      "explanation": "Count the number of alerts between 2pm and 4pm in the last 30 days",
+      "result": [
+        {
+          "_id": null,
+          "count": 652
+        }
+      ],
+      "row_count": 1,
+      "answer": "Between 2pm and 4pm in the last 30 days, there were 652 alerts recorded.",
+      "stages": [
+        {
+          "name": "Query generation",
+          "description": "Asked the language model to translate the question into a MongoDB aggregation pipeline (includes JSON-syntax repair and structural validation of the result).",
+          "duration_ms": 1527
+        },
+        {
+          "name": "Database execution",
+          "description": "Ran the generated pipeline against MongoDB.",
+          "duration_ms": 3
+        },
+        {
+          "name": "Self-correction attempt 1",
+          "description": "Previous pipeline was rejected (it only filtered/limited instead of aggregating, which the question needed); regenerated and re-ran it against MongoDB.",
+          "duration_ms": 1606
+        },
+        {
+          "name": "Answer generation",
+          "description": "Asked the language model to phrase the raw result rows as a natural-language answer, then ran deterministic safety checks (no invented values, no wrong superlatives, no dropped data).",
+          "duration_ms": 258
+        }
+      ]
+    }
+  },
+  {
+    "id": "hour_range_9am_11am_today",
+    "category": "hour_filters",
+    "passed": true,
+    "reason": "ok",
+    "final": {
+      "question": "How many missing cleaning alerts happened between 9am and 11am today?",
+      "intent": "data_query",
+      "pipeline": [
+        {
+          "$match": {
+            "alert_type": "MISSING_CLEANING",
+            "timestamp": {
+              "$gte": "2026-09-25T00:00:00+00:00",
+              "$lt": "2026-09-26T00:00:00+00:00"
+            }
+          }
+        },
+        {
+          "$match": {
+            "hour": {
+              "$gte": 9,
+              "$lt": 11
+            }
+          }
+        },
+        {
+          "$count": "total"
+        }
+      ],
+      "explanation": "Number of missing cleaning alerts between 9am and 11am today",
+      "result": [],
+      "row_count": 0,
+      "answer": "No matching data found for that.",
+      "stages": [
+        {
+          "name": "Query generation",
+          "description": "Asked the language model to translate the question into a MongoDB aggregation pipeline (includes JSON-syntax repair and structural validation of the result).",
+          "duration_ms": 1211
+        },
+        {
+          "name": "Database execution",
+          "description": "Ran the generated pipeline against MongoDB.",
+          "duration_ms": 1
+        },
+        {
+          "name": "Answer generation",
+          "description": "Asked the language model to phrase the raw result rows as a natural-language answer, then ran deterministic safety checks (no invented values, no wrong superlatives, no dropped data).",
+          "duration_ms": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "peak_day_hand_touch",
+    "category": "day_of_week",
+    "passed": true,
+    "reason": "ok",
+    "final": {
+      "question": "Which day had the most hand touch alerts?",
+      "intent": "data_query",
+      "pipeline": [
+        {
+          "$match": {
+            "alert_type": "HAND_TOUCH"
+          }
+        },
+        {
+          "$group": {
+            "_id": {
+              "date": {
+                "$dateToString": {
+                  "format": "%Y-%m-%d",
+                  "date": "$timestamp"
+                }
+              }
+            },
+            "count": {
+              "$sum": 1
+            }
+          }
+        },
+        {
+          "$sort": {
+            "count": -1
+          }
+        },
+        {
+          "$limit": 1
+        }
+      ],
+      "explanation": "Find the day with most hand touch alerts",
+      "result": [
+        {
+          "count": 250,
+          "date": "2023-09-14"
+        }
+      ],
+      "row_count": 1,
+      "answer": "The day with the most hand touch alerts was 2023-09-14, a Thursday, with 250 alerts recorded.",
+      "stages": [
+        {
+          "name": "Query generation",
+          "description": "Asked the language model to translate the question into a MongoDB aggregation pipeline (includes JSON-syntax repair and structural validation of the result).",
+          "duration_ms": 783
+        },
+        {
+          "name": "Database execution",
+          "description": "Ran the generated pipeline against MongoDB.",
+          "duration_ms": 39
+        },
+        {
+          "name": "Answer generation",
+          "description": "Asked the language model to phrase the raw result rows as a natural-language answer, then ran deterministic safety checks (no invented values, no wrong superlatives, no dropped data).",
+          "duration_ms": 291
+        }
+      ]
+    }
+  },
+  {
+    "id": "peak_day_fast_inspection_last_week",
+    "category": "day_of_week",
+    "passed": true,
+    "reason": "ok",
+    "final": {
+      "question": "Which day had the most fast inspection alerts last week?",
+      "intent": "data_query",
+      "pipeline": [
+        {
+          "$match": {
+            "alert_type": "FAST_INSPECTION",
+            "timestamp": {
+              "$gte": "2026-09-14T00:00:00+00:00",
+              "$lt": "2026-09-21T00:00:00+00:00"
+            }
+          }
+        },
+        {
+          "$group": {
+            "_id": {
+              "$dateToString": {
+                "format": "%Y-%m-%d",
+                "date": "$timestamp"
+              }
+            },
+            "count": {
+              "$sum": 1
+            }
+          }
+        },
+        {
+          "$sort": {
+            "count": -1
+          }
+        },
+        {
+          "$limit": 1
+        }
+      ],
+      "explanation": "Find the day with most FAST_INSPECTION alerts last week",
+      "result": [
+        {
+          "_id": "2026-09-15",
+          "count": 89
+        }
+      ],
+      "row_count": 1,
+      "answer": "The busiest day last week was 2026-09-15, a Tuesday, with 89 fast inspection alerts recorded.",
+      "stages": [
+        {
+          "name": "Query generation",
+          "description": "Asked the language model to translate the question into a MongoDB aggregation pipeline (includes JSON-syntax repair and structural validation of the result).",
+          "duration_ms": 1647
+        },
+        {
+          "name": "Database execution",
+          "description": "Ran the generated pipeline against MongoDB.",
+          "duration_ms": 1
+        },
+        {
+          "name": "Answer generation",
+          "description": "Asked the language model to phrase the raw result rows as a natural-language answer, then ran deterministic safety checks (no invented values, no wrong superlatives, no dropped data).",
+          "duration_ms": 283
+        }
+      ]
+    }
+  },
+  {
+    "id": "busiest_weekday_missing_cleaning",
+    "category": "day_of_week",
+    "passed": true,
+    "reason": "ok",
+    "final": {
+      "question": "Which day of the week sees the most missing cleaning alerts?",
+      "intent": "data_query",
+      "pipeline": [
+        {
+          "$match": {
+            "alert_type": "MISSING_CLEANING"
+          }
+        },
+        {
+          "$group": {
+            "_id": {
+              "dayOfWeek": {
+                "$dayOfWeek": "$timestamp"
+              }
+            },
+            "count": {
+              "$sum": 1
+            }
+          }
+        },
+        {
+          "$sort": {
+            "count": -1
+          }
+        },
+        {
+          "$limit": 1
+        }
+      ],
+      "explanation": "Find the day of the week with the most missing cleaning alerts",
+      "result": [
+        {
+          "count": 11108,
+          "dayOfWeek": 5
+        }
+      ],
+      "row_count": 1,
+      "answer": "11,108 alerts on Thursdays.",
+      "stages": [
+        {
+          "name": "Query generation",
+          "description": "Asked the language model to translate the question into a MongoDB aggregation pipeline (includes JSON-syntax repair and structural validation of the result).",
+          "duration_ms": 1185
+        },
+        {
+          "name": "Database execution",
+          "description": "Ran the generated pipeline against MongoDB.",
+          "duration_ms": 15
+        },
+        {
+          "name": "Answer generation",
+          "description": "Asked the language model to phrase the raw result rows as a natural-language answer, then ran deterministic safety checks (no invented values, no wrong superlatives, no dropped data).",
+          "duration_ms": 298
+        }
+      ]
+    }
+  },
+  {
+    "id": "busiest_week_this_quarter",
+    "category": "week_grouping",
+    "passed": true,
+    "reason": "ok",
+    "final": {
+      "question": "Which week had the most alerts this quarter?",
+      "intent": "data_query",
+      "pipeline": [
+        {
+          "$match": {
+            "timestamp": {
+              "$gte": "2026-06-01T00:00:00+00:00",
+              "$lt": "2026-09-26T00:00:00+00:00"
+            },
+            "alert_type": {
+              "$ne": "NORMAL_OPERATION"
+            }
+          }
+        },
+        {
+          "$group": {
+            "_id": {
+              "$dateToString": {
+                "format": "%Y-%U",
+                "date": "$timestamp"
+              }
+            },
+            "count": {
+              "$sum": 1
+            }
+          }
+        },
+        {
+          "$match": {
+            "_id": {
+              "$eq": {
+                "$dateToString": {
+                  "format": "%Y-%U",
+                  "date": "$timestamp"
+                }
+              }
+            }
+          }
+        },
+        {
+          "$sort": {
+            "count": -1
+          }
+        },
+        {
+          "$limit": 1
+        },
+        {
+          "$project": {
+            "_id": 0,
+            "count": 1
+          }
+        }
+      ],
+      "explanation": "Find the week with most alerts this quarter",
+      "result": [],
+      "row_count": 0,
+      "answer": "No matching data found for that.",
+      "stages": [
+        {
+          "name": "Query generation",
+          "description": "Asked the language model to translate the question into a MongoDB aggregation pipeline (includes JSON-syntax repair and structural validation of the result).",
+          "duration_ms": 2014
+        },
+        {
+          "name": "Database execution",
+          "description": "Ran the generated pipeline against MongoDB.",
+          "duration_ms": 8
+        },
+        {
+          "name": "Answer generation",
+          "description": "Asked the language model to phrase the raw result rows as a natural-language answer, then ran deterministic safety checks (no invented values, no wrong superlatives, no dropped data).",
+          "duration_ms": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "weekly_report_last_4_weeks",
+    "category": "week_grouping",
+    "passed": false,
+    "reason": "report (month) should not have: {'by_month', 'by_day'}",
+    "final": {
+      "question": "Give me a weekly report for the last 4 weeks",
+      "intent": "data_query",
+      "pipeline": [
+        {
+          "$match": {
+            "alert_type": {
+              "$ne": "NORMAL_OPERATION"
+            },
+            "timestamp": {
+              "$gte": "2026-08-29T00:00:00+00:00",
+              "$lt": "2026-09-26T00:00:00+00:00"
+            }
+          }
+        },
+        {
+          "$facet": {
+            "total_alerts": [
+              {
+                "$count": "total"
+              }
+            ],
+            "by_type": [
+              {
+                "$group": {
+                  "_id": "$alert_type",
+                  "count": {
+                    "$sum": 1
+                  }
+                }
+              },
+              {
+                "$sort": {
+                  "count": -1
+                }
+              }
+            ],
+            "by_week": [
+              {
+                "$group": {
+                  "_id": {
+                    "$dateToString": {
+                      "format": "%Y-%U",
+                      "date": "$timestamp"
+                    }
+                  },
+                  "count": {
+                    "$sum": 1
+                  }
+                }
+              },
+              {
+                "$sort": {
+                  "_id": 1
+                }
+              }
+            ],
+            "avg_inspection_time": [
+              {
+                "$group": {
+                  "_id": null,
+                  "avg": {
+                    "$avg": "$inspection_time"
+                  }
+                }
+              }
+            ],
+            "by_month": [
+              {
+                "$group": {
+                  "_id": {
+                    "$dateToString": {
+                      "format": "%Y-%m",
+                      "date": "$timestamp"
+                    }
+                  },
+                  "count": {
+                    "$sum": 1
+                  }
+                }
+              },
+              {
+                "$sort": {
+                  "_id": 1
+                }
+              }
+            ],
+            "by_day": [
+              {
+                "$group": {
+                  "_id": {
+                    "$dateToString": {
+                      "format": "%Y-%m-%d",
+                      "date": "$timestamp"
+                    }
+                  },
+                  "count": {
+                    "$sum": 1
+                  }
+                }
+              },
+              {
+                "$sort": {
+                  "_id": 1
+                }
+              }
+            ]
+          }
+        },
+        {
+          "$unwind": "$by_week"
+        },
+        {
+          "$limit": 1
+        }
+      ],
+      "explanation": "Weekly report for the last 4 weeks",
+      "result": [
+        {
+          "total_alerts": [
+            {
+              "total": 4353
+            }
+          ],
+          "by_type": [
+            {
+              "_id": "FAST_INSPECTION",
+              "count": 2068
+            },
+            {
+              "_id": "HAND_TOUCH",
+              "count": 1640
+            },
+            {
+              "_id": "MISSING_CLEANING",
+              "count": 645
+            }
+          ],
+          "by_week": {
+            "_id": "2026-34",
+            "count": 115
+          },
+          "avg_inspection_time": [
+            {
+              "_id": null,
+              "avg": 10.3
+            }
+          ],
+          "by_month": [
+            {
+              "_id": "2026-08",
+              "count": 324
+            },
+            {
+              "_id": "2026-09",
+              "count": 4029
+            }
+          ],
+          "by_day": [
+            {
+              "_id": "2026-08-29",
+              "count": 115
+            },
+            {
+              "_id": "2026-08-30",
+              "count": 101
+            },
+            {
+              "_id": "2026-08-31",
+              "count": 108
+            },
+            {
+              "_id": "2026-09-01",
+              "count": 190
+            },
+            {
+              "_id": "2026-09-02",
+              "count": 328
+            },
+            {
+              "_id": "2026-09-03",
+              "count": 158
+            },
+            {
+              "_id": "2026-09-04",
+              "count": 155
+            },
+            {
+              "_id": "2026-09-05",
+              "count": 146
+            },
+            {
+              "_id": "2026-09-06",
+              "count": 148
+            },
+            {
+              "_id": "2026-09-07",
+              "count": 176
+            },
+            {
+              "_id": "2026-09-08",
+              "count": 169
+            },
+            {
+              "_id": "2026-09-09",
+              "count": 188
+            },
+            {
+              "_id": "2026-09-10",
+              "count": 196
+            },
+            {
+              "_id": "2026-09-11",
+              "count": 191
+            },
+            {
+              "_id": "2026-09-12",
+              "count": 148
+            },
+            {
+              "_id": "2026-09-13",
+              "count": 120
+            },
+            {
+              "_id": "2026-09-14",
+              "count": 171
+            },
+            {
+              "_id": "2026-09-15",
+              "count": 181
+            },
+            {
+              "_id": "2026-09-16",
+              "count": 169
+            },
+            {
+              "_id": "2026-09-17",
+              "count": 187
+            },
+            {
+              "_id": "2026-09-18",
+              "count": 155
+            },
+            {
+              "_id": "2026-09-19",
+              "count": 124
+            },
+            {
+              "_id": "2026-09-20",
+              "count": 146
+            },
+            {
+              "_id": "2026-09-21",
+              "count": 167
+            },
+            {
+              "_id": "2026-09-22",
+              "count": 182
+            },
+            {
+              "_id": "2026-09-23",
+              "count": 166
+            },
+            {
+              "_id": "2026-09-24",
+              "count": 68
+            }
+          ]
+        }
+      ],
+      "row_count": 1,
+      "answer": "Here's your weekly report for the last 4 weeks. The busiest week was week ending on 2026-09-05 (Saturday), with a total of 4353 fast inspection alerts recorded. On that week, there were also 1640 hand touch alerts and 645 missing cleaning alerts. \n\nIn terms of average inspection time, it took around 10.3 seconds to complete an inspection during the last four weeks.",
+      "stages": [
+        {
+          "name": "Query generation",
+          "description": "Asked the language model to translate the question into a MongoDB aggregation pipeline (includes JSON-syntax repair and structural validation of the result).",
+          "duration_ms": 2427
+        },
+        {
+          "name": "Database execution",
+          "description": "Ran the generated pipeline against MongoDB.",
+          "duration_ms": 8
+        },
+        {
+          "name": "Answer generation",
+          "description": "Asked the language model to phrase the raw result rows as a natural-language answer, then ran deterministic safety checks (no invented values, no wrong superlatives, no dropped data).",
+          "duration_ms": 881
+        }
+      ]
+    }
+  },
+  {
+    "id": "compare_types_this_week_vs_last_week",
+    "category": "comparisons",
+    "passed": false,
+    "reason": "unexpected intent='unsupported' for a real data question",
+    "final": {
+      "question": "Compare fast inspection and hand touch alert counts for this week vs last week",
+      "intent": "unsupported",
+      "pipeline": null,
+      "explanation": null,
+      "result": [],
+      "row_count": 0,
+      "answer": "I can only answer questions about the alert log \u2014 this data has alert_type, zone, cloth_detected, inspection_time, and timestamp for each alert. Could you rephrase your question in those terms?",
+      "stages": [
+        {
+          "name": "Query generation",
+          "description": "Asked the language model to translate the question into a MongoDB aggregation pipeline (includes JSON-syntax repair and structural validation of the result).",
+          "duration_ms": 2887
+        },
+        {
+          "name": "Database execution",
+          "description": "Ran the generated pipeline against MongoDB.",
+          "duration_ms": 0
+        },
+        {
+          "name": "Answer generation",
+          "description": "Asked the language model to phrase the raw result rows as a natural-language answer, then ran deterministic safety checks (no invented values, no wrong superlatives, no dropped data).",
+          "duration_ms": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "compare_avg_time_types",
+    "category": "comparisons",
+    "passed": true,
+    "reason": "ok",
+    "final": {
+      "question": "Compare average inspection time between fast inspection and missing cleaning alerts",
+      "intent": "data_query",
+      "pipeline": [
+        {
+          "$match": {
+            "alert_type": {
+              "$in": [
+                "FAST_INSPECTION",
+                "MISSING_CLEANING"
+              ]
+            }
+          }
+        },
+        {
+          "$group": {
+            "_id": "$alert_type",
+            "avg_inspection_time": {
+              "$avg": "$inspection_time"
+            }
+          }
+        },
+        {
+          "$sort": {
+            "avg_inspection_time": -1
+          }
+        },
+        {
+          "$limit": 2
+        }
+      ],
+      "explanation": "Compare average inspection time between fast inspection and missing cleaning alerts",
+      "result": [
+        {
+          "_id": "MISSING_CLEANING",
+          "avg_inspection_time": 17.44
+        },
+        {
+          "_id": "FAST_INSPECTION",
+          "avg_inspection_time": 2.25
+        }
+      ],
+      "row_count": 2,
+      "answer": "The average inspection time for fast inspection alerts was 2.25 seconds, while the average inspection time for missing cleaning alerts was 17.44 seconds.",
+      "stages": [
+        {
+          "name": "Query generation",
+          "description": "Asked the language model to translate the question into a MongoDB aggregation pipeline (includes JSON-syntax repair and structural validation of the result).",
+          "duration_ms": 1002
+        },
+        {
+          "name": "Database execution",
+          "description": "Ran the generated pipeline against MongoDB.",
+          "duration_ms": 109
+        },
+        {
+          "name": "Answer generation",
+          "description": "Asked the language model to phrase the raw result rows as a natural-language answer, then ran deterministic safety checks (no invented values, no wrong superlatives, no dropped data).",
+          "duration_ms": 333
+        }
+      ]
+    }
+  },
+  {
+    "id": "compare_today_vs_yesterday",
+    "category": "comparisons",
+    "passed": true,
+    "reason": "ok",
+    "final": {
+      "question": "How does today compare to yesterday in total alert count?",
+      "intent": "data_query",
+      "pipeline": [
+        {
+          "$match": {
+            "timestamp": {
+              "$gte": "2026-09-24T00:00:00+00:00",
+              "$lt": "2026-09-25T00:00:00+00:00"
+            },
+            "alert_type": {
+              "$ne": "NORMAL_OPERATION"
+            }
+          }
+        },
+        {
+          "$match": {
+            "alert_type": {
+              "$ne": "NORMAL_OPERATION"
+            }
+          }
+        },
+        {
+          "$group": {
+            "_id": null,
+            "count": {
+              "$sum": 1
+            }
+          }
+        },
+        {
+          "$sort": {
+            "count": -1
+          }
+        },
+        {
+          "$limit": 1
+        }
+      ],
+      "explanation": "Compare today's total alert count to yesterday's",
+      "result": [
+        {
+          "_id": null,
+          "count": 68
+        }
+      ],
+      "row_count": 1,
+      "answer": "Yesterday had 68 alerts, and today also had 68 alerts.",
+      "stages": [
+        {
+          "name": "Query generation",
+          "description": "Asked the language model to translate the question into a MongoDB aggregation pipeline (includes JSON-syntax repair and structural validation of the result).",
+          "duration_ms": 1517
+        },
+        {
+          "name": "Database execution",
+          "description": "Ran the generated pipeline against MongoDB.",
+          "duration_ms": 1
+        },
+        {
+          "name": "Answer generation",
+          "description": "Asked the language model to phrase the raw result rows as a natural-language answer, then ran deterministic safety checks (no invented values, no wrong superlatives, no dropped data).",
+          "duration_ms": 192
+        }
+      ]
+    }
+  },
+  {
+    "id": "quarterly_report",
+    "category": "reports",
+    "passed": false,
+    "reason": "report (quarter) missing sections: {'by_week'}",
+    "final": {
+      "question": "Give me a quarterly report",
+      "intent": "data_query",
+      "pipeline": [
+        {
+          "$match": {
+            "alert_type": {
+              "$ne": "NORMAL_OPERATION"
+            },
+            "timestamp": {
+              "$gte": "2026-06-01T00:00:00+00:00",
+              "$lt": "2026-09-26T00:00:00+00:00"
+            }
+          }
+        },
+        {
+          "$facet": {
+            "total_alerts": [
+              {
+                "$count": "total"
+              }
+            ],
+            "by_type": [
+              {
+                "$group": {
+                  "_id": "$alert_type",
+                  "count": {
+                    "$sum": 1
+                  }
+                }
+              },
+              {
+                "$sort": {
+                  "count": -1
+                }
+              }
+            ],
+            "by_month": [
+              {
+                "$group": {
+                  "_id": {
+                    "$dateToString": {
+                      "format": "%Y-%m",
+                      "date": "$timestamp"
+                    }
+                  },
+                  "count": {
+                    "$sum": 1
+                  }
+                }
+              },
+              {
+                "$sort": {
+                  "_id": 1
+                }
+              }
+            ],
+            "by_day": [
+              {
+                "$group": {
+                  "_id": {
+                    "$dateToString": {
+                      "format": "%Y-%m-%d",
+                      "date": "$timestamp"
+                    }
+                  },
+                  "count": {
+                    "$sum": 1
+                  }
+                }
+              },
+              {
+                "$project": {
+                  "_id": 0,
+                  "count": 1
+                }
+              },
+              {
+                "$sort": {
+                  "_id": 1
+                }
+              }
+            ],
+            "avg_inspection_time": [
+              {
+                "$group": {
+                  "_id": null,
+                  "avg": {
+                    "$avg": "$inspection_time"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "$unwind": "$by_day"
+        },
+        {
+          "$limit": 5
+        }
+      ],
+      "explanation": "",
+      "result": [
+        {
+          "total_alerts": [
+            {
+              "total": 18866
+            }
+          ],
+          "by_type": [
+            {
+              "_id": "FAST_INSPECTION",
+              "count": 8734
+            },
+            {
+              "_id": "HAND_TOUCH",
+              "count": 7345
+            },
+            {
+              "_id": "MISSING_CLEANING",
+              "count": 2787
+            }
+          ],
+          "by_month": [
+            {
+              "_id": "2026-06",
+              "count": 4940
+            },
+            {
+              "_id": "2026-07",
+              "count": 4983
+            },
+            {
+              "_id": "2026-08",
+              "count": 4914
+            },
+            {
+              "_id": "2026-09",
+              "count": 4029
+            }
+          ],
+          "by_day": {
+            "count": 152
+          },
+          "avg_inspection_time": [
+            {
+              "_id": null,
+              "avg": 10.44
+            }
+          ]
+        },
+        {
+          "total_alerts": [
+            {
+              "total": 18866
+            }
+          ],
+          "by_type": [
+            {
+              "_id": "FAST_INSPECTION",
+              "count": 8734
+            },
+            {
+              "_id": "HAND_TOUCH",
+              "count": 7345
+            },
+            {
+              "_id": "MISSING_CLEANING",
+              "count": 2787
+            }
+          ],
+          "by_month": [
+            {
+              "_id": "2026-06",
+              "count": 4940
+            },
+            {
+              "_id": "2026-07",
+              "count": 4983
+            },
+            {
+              "_id": "2026-08",
+              "count": 4914
+            },
+            {
+              "_id": "2026-09",
+              "count": 4029
+            }
+          ],
+          "by_day": {
+            "count": 101
+          },
+          "avg_inspection_time": [
+            {
+              "_id": null,
+              "avg": 10.44
+            }
+          ]
+        },
+        {
+          "total_alerts": [
+            {
+              "total": 18866
+            }
+          ],
+          "by_type": [
+            {
+              "_id": "FAST_INSPECTION",
+              "count": 8734
+            },
+            {
+              "_id": "HAND_TOUCH",
+              "count": 7345
+            },
+            {
+              "_id": "MISSING_CLEANING",
+              "count": 2787
+            }
+          ],
+          "by_month": [
+            {
+              "_id": "2026-06",
+              "count": 4940
+            },
+            {
+              "_id": "2026-07",
+              "count": 4983
+            },
+            {
+              "_id": "2026-08",
+              "count": 4914
+            },
+            {
+              "_id": "2026-09",
+              "count": 4029
+            }
+          ],
+          "by_day": {
+            "count": 171
+          },
+          "avg_inspection_time": [
+            {
+              "_id": null,
+              "avg": 10.44
+            }
+          ]
+        },
+        {
+          "total_alerts": [
+            {
+              "total": 18866
+            }
+          ],
+          "by_type": [
+            {
+              "_id": "FAST_INSPECTION",
+              "count": 8734
+            },
+            {
+              "_id": "HAND_TOUCH",
+              "count": 7345
+            },
+            {
+              "_id": "MISSING_CLEANING",
+              "count": 2787
+            }
+          ],
+          "by_month": [
+            {
+              "_id": "2026-06",
+              "count": 4940
+            },
+            {
+              "_id": "2026-07",
+              "count": 4983
+            },
+            {
+              "_id": "2026-08",
+              "count": 4914
+            },
+            {
+              "_id": "2026-09",
+              "count": 4029
+            }
+          ],
+          "by_day": {
+            "count": 148
+          },
+          "avg_inspection_time": [
+            {
+              "_id": null,
+              "avg": 10.44
+            }
+          ]
+        },
+        {
+          "total_alerts": [
+            {
+              "total": 18866
+            }
+          ],
+          "by_type": [
+            {
+              "_id": "FAST_INSPECTION",
+              "count": 8734
+            },
+            {
+              "_id": "HAND_TOUCH",
+              "count": 7345
+            },
+            {
+              "_id": "MISSING_CLEANING",
+              "count": 2787
+            }
+          ],
+          "by_month": [
+            {
+              "_id": "2026-06",
+              "count": 4940
+            },
+            {
+              "_id": "2026-07",
+              "count": 4983
+            },
+            {
+              "_id": "2026-08",
+              "count": 4914
+            },
+            {
+              "_id": "2026-09",
+              "count": 4029
+            }
+          ],
+          "by_day": {
+            "count": 105
+          },
+          "avg_inspection_time": [
+            {
+              "_id": null,
+              "avg": 10.44
+            }
+          ]
+        }
+      ],
+      "row_count": 5,
+      "answer": "The total number of alerts recorded this quarter is 18866. The breakdown by type shows that fast inspection alerts accounted for the majority, with 8734 recorded, followed by hand touch and missing cleaning alerts, each at 7345 and 2787 respectively. \n\nLooking at the monthly breakdown, we can see that July had the most alerts, with 4983, closely followed by June with 4940 and August with 4914. September had the fewest, with 4029.\n\nIn terms of days, there were a total of 152 fast inspection alerts recorded on specific days, but without more information, we can't determine which exact days those were. However, we do know that there were fewer than 101 and more than 105 fast inspection alerts recorded on different days throughout the quarter.\n\nThe average time taken for inspections was consistently around 10.44 seconds across all four months of the quarter.",
+      "stages": [
+        {
+          "name": "Query generation",
+          "description": "Asked the language model to translate the question into a MongoDB aggregation pipeline (includes JSON-syntax repair and structural validation of the result).",
+          "duration_ms": 3486
+        },
+        {
+          "name": "Database execution",
+          "description": "Ran the generated pipeline against MongoDB.",
+          "duration_ms": 27
+        },
+        {
+          "name": "Self-correction attempt 1",
+          "description": "Previous pipeline was rejected (the database rejected it (PlanExecutor error during aggregation :: caused by :: 'replacement document'  must evaluate to an object, but resulting value was: [{}, {}, {}, {}]. Type of resulting value: 'array'. Input document: {total_alerts: [{total: 18866}], by_type: [{_id: \"FAST_INSPECTION\", count: 8734}, {_id: \"HAND_TOUCH\", count: 7345}, {_id: \"MISSING_CLEANING\", count: 2787}], by_month: [{_id: \"2026-06\", count: 4940}, {_id: \"2026-07\", count: 4983}, {_id: \"2026-08\", count: 4914}, {_id: \"2026-09\", count: 4029}], by_day: [{_id: \"2026-06-01\", count: 200}, {_id: \"2026-06-02\", count: 194}, {_id: \"2026-06-03\", count: 157}, {_id: \"2026-06-04\", count: 153}, {_id: \"2026-06-05\", count: 195}, {_id: \"2026-06-06\", count: 129}, {_id: \"2026-06-07\", count: 134}, {_id: \"2026-06-08\", count: 199}, {_id: \"2026-06-09\", count: 182}, {_id: \"2026-06-10\", count: 171}, {_id: \"2026-06-11\", count: 190}, {_id: \"2026-06-12\", count: 183}, {_id: \"2026-06-13\", count: 123}, {_id: \"2026-06-14\", count: 118}, {_id: \"2026-06-15\", count: 182}, {_id: \"2026-06-16\", count: 188}, {_id: \"2026-06-17\", count: 175}, {_id: \"2026-06-18\", count: 178}, {_id: \"2026-06-19\", count: 168}, {_id: \"2026-06-20\", count: 101}, {_id: \"2026-06-21\", count: 131}, {_id: \"2026-06-22\", count: 167}, {_id: \"2026-06-23\", count: 181}, {_id: \"2026-06-24\", count: 156}, {_id: \"2026-06-25\", count: 197}, {_id: \"2026-06-26\", count: 173}, {_id: \"2026-06-27\", count: 129}, {_id: \"2026-06-28\", count: 133}, {_id: \"2026-06-29\", count: 163}, {_id: \"2026-06-30\", count: 190}, {_id: \"2026-07-01\", count: 190}, {_id: \"2026-07-02\", count: 198}, {_id: \"2026-07-03\", count: 153}, {_id: \"2026-07-04\", count: 105}, {_id: \"2026-07-05\", count: 132}, {_id: \"2026-07-06\", count: 200}, {_id: \"2026-07-07\", count: 200}, {_id: \"2026-07-08\", count: 165}, {_id: \"2026-07-09\", count: 193}, {_id: \"2026-07-10\", count: 183}, {_id: \"2026-07-11\", count: 107}, {_id: \"2026-07-12\", count: 114}, {_id: \"2026-07-13\", count: 180}, {_id: \"2026-07-14\", count: 196}, {_id: \"2026-07-15\", count: 150}, {_id: \"2026-07-16\", count: 186}, {_id: \"2026-07-17\", count: 180}, {_id: \"2026-07-18\", count: 121}, {_id: \"2026-07-19\", count: 127}, {_id: \"2026-07-20\", count: 158}, {_id: \"2026-07-21\", count: 163}, {_id: \"2026-07-22\", count: 158}, {_id: \"2026-07-23\", count: 155}, {_id: \"2026-07-24\", count: 186}, {_id: \"2026-07-25\", count: 123}, {_id: \"2026-07-26\", count: 115}, {_id: \"2026-07-27\", count: 189}, {_id: \"2026-07-28\", count: 167}, {_id: \"2026-07-29\", count: 167}, {_id: \"2026-07-30\", count: 170}, {_id: \"2026-07-31\", count: 152}, {_id: \"2026-08-01\", count: 105}, {_id: \"2026-08-02\", count: 138}, {_id: \"2026-08-03\", count: 154}, {_id: \"2026-08-04\", count: 185}, {_id: \"2026-08-05\", count: 153}, {_id: \"2026-08-06\", count: 195}, {_id: \"2026-08-07\", count: 176}, {_id: \"2026-08-08\", count: 124}, {_id: \"2026-08-09\", count: 106}, {_id: \"2026-08-10\", count: 194}, {_id: \"2026-08-11\", count: 164}, {_id: \"2026-08-12\", count: 194}, {_id: \"2026-08-13\", count: 193}, {_id: \"2026-08-14\", count: 171}, {_id: \"2026-08-15\", count: 148}, {_id: \"2026-08-16\", count: 147}, {_id: \"2026-08-17\", count: 194}, {_id: \"2026-08-18\", count: 192}, {_id: \"2026-08-19\", count: 152}, {_id: \"2026-08-20\", count: 176}, {_id: \"2026-08-21\", count: 189}, {_id: \"2026-08-22\", count: 128}, {_id: \"2026-08-23\", count: 144}, {_id: \"2026-08-24\", count: 175}, {_id: \"2026-08-25\", count: 173}, {_id: \"2026-08-26\", count: 151}, {_id: \"2026-08-27\", count: 189}, {_id: \"2026-08-28\", count: 180}, {_id: \"2026-08-29\", count: 115}, {_id: \"2026-08-30\", count: 101}, {_id: \"2026-08-31\", count: 108}, {_id: \"2026-09-01\", count: 190}, {_id: \"2026-09-02\", count: 328}, {_id: \"2026-09-03\", count: 158}, {_id: \"2026-09-04\", count: 155}, {_id: \"2026-09-05\", count: 146}, {_id: \"2026-09-06\", count: 148}, {_id: \"2026-09-07\", count: 176}, {_id: \"2026-09-08\", count: 169}, {_id: \"2026-09-09\", count: 188}, {_id: \"2026-09-10\", count: 196}, {_id: \"2026-09-11\", count: 191}, {_id: \"2026-09-12\", count: 148}, {_id: \"2026-09-13\", count: 120}, {_id: \"2026-09-14\", count: 171}, {_id: \"2026-09-15\", count: 181}, {_id: \"2026-09-16\", count: 169}, {_id: \"2026-09-17\", count: 187}, {_id: \"2026-09-18\", count: 155}, {_id: \"2026-09-19\", count: 124}, {_id: \"2026-09-20\", count: 146}, {_id: \"2026-09-21\", count: 167}, {_id: \"2026-09-22\", count: 182}, {_id: \"2026-09-23\", count: 166}, {_id: \"2026-09-24\", count: 68}], avg_inspection_time: [{_id: null, avg: 10.4438}]}, full error: {'ok': 0.0, 'errmsg': 'PlanExecutor error during aggregation :: caused by :: \\'replacement document\\'  must evaluate to an object, but resulting value was: [{}, {}, {}, {}]. Type of resulting value: \\'array\\'. Input document: {total_alerts: [{total: 18866}], by_type: [{_id: \"FAST_INSPECTION\", count: 8734}, {_id: \"HAND_TOUCH\", count: 7345}, {_id: \"MISSING_CLEANING\", count: 2787}], by_month: [{_id: \"2026-06\", count: 4940}, {_id: \"2026-07\", count: 4983}, {_id: \"2026-08\", count: 4914}, {_id: \"2026-09\", count: 4029}], by_day: [{_id: \"2026-06-01\", count: 200}, {_id: \"2026-06-02\", count: 194}, {_id: \"2026-06-03\", count: 157}, {_id: \"2026-06-04\", count: 153}, {_id: \"2026-06-05\", count: 195}, {_id: \"2026-06-06\", count: 129}, {_id: \"2026-06-07\", count: 134}, {_id: \"2026-06-08\", count: 199}, {_id: \"2026-06-09\", count: 182}, {_id: \"2026-06-10\", count: 171}, {_id: \"2026-06-11\", count: 190}, {_id: \"2026-06-12\", count: 183}, {_id: \"2026-06-13\", count: 123}, {_id: \"2026-06-14\", count: 118}, {_id: \"2026-06-15\", count: 182}, {_id: \"2026-06-16\", count: 188}, {_id: \"2026-06-17\", count: 175}, {_id: \"2026-06-18\", count: 178}, {_id: \"2026-06-19\", count: 168}, {_id: \"2026-06-20\", count: 101}, {_id: \"2026-06-21\", count: 131}, {_id: \"2026-06-22\", count: 167}, {_id: \"2026-06-23\", count: 181}, {_id: \"2026-06-24\", count: 156}, {_id: \"2026-06-25\", count: 197}, {_id: \"2026-06-26\", count: 173}, {_id: \"2026-06-27\", count: 129}, {_id: \"2026-06-28\", count: 133}, {_id: \"2026-06-29\", count: 163}, {_id: \"2026-06-30\", count: 190}, {_id: \"2026-07-01\", count: 190}, {_id: \"2026-07-02\", count: 198}, {_id: \"2026-07-03\", count: 153}, {_id: \"2026-07-04\", count: 105}, {_id: \"2026-07-05\", count: 132}, {_id: \"2026-07-06\", count: 200}, {_id: \"2026-07-07\", count: 200}, {_id: \"2026-07-08\", count: 165}, {_id: \"2026-07-09\", count: 193}, {_id: \"2026-07-10\", count: 183}, {_id: \"2026-07-11\", count: 107}, {_id: \"2026-07-12\", count: 114}, {_id: \"2026-07-13\", count: 180}, {_id: \"2026-07-14\", count: 196}, {_id: \"2026-07-15\", count: 150}, {_id: \"2026-07-16\", count: 186}, {_id: \"2026-07-17\", count: 180}, {_id: \"2026-07-18\", count: 121}, {_id: \"2026-07-19\", count: 127}, {_id: \"2026-07-20\", count: 158}, {_id: \"2026-07-21\", count: 163}, {_id: \"2026-07-22\", count: 158}, {_id: \"2026-07-23\", count: 155}, {_id: \"2026-07-24\", count: 186}, {_id: \"2026-07-25\", count: 123}, {_id: \"2026-07-26\", count: 115}, {_id: \"2026-07-27\", count: 189}, {_id: \"2026-07-28\", count: 167}, {_id: \"2026-07-29\", count: 167}, {_id: \"2026-07-30\", count: 170}, {_id: \"2026-07-31\", count: 152}, {_id: \"2026-08-01\", count: 105}, {_id: \"2026-08-02\", count: 138}, {_id: \"2026-08-03\", count: 154}, {_id: \"2026-08-04\", count: 185}, {_id: \"2026-08-05\", count: 153}, {_id: \"2026-08-06\", count: 195}, {_id: \"2026-08-07\", count: 176}, {_id: \"2026-08-08\", count: 124}, {_id: \"2026-08-09\", count: 106}, {_id: \"2026-08-10\", count: 194}, {_id: \"2026-08-11\", count: 164}, {_id: \"2026-08-12\", count: 194}, {_id: \"2026-08-13\", count: 193}, {_id: \"2026-08-14\", count: 171}, {_id: \"2026-08-15\", count: 148}, {_id: \"2026-08-16\", count: 147}, {_id: \"2026-08-17\", count: 194}, {_id: \"2026-08-18\", count: 192}, {_id: \"2026-08-19\", count: 152}, {_id: \"2026-08-20\", count: 176}, {_id: \"2026-08-21\", count: 189}, {_id: \"2026-08-22\", count: 128}, {_id: \"2026-08-23\", count: 144}, {_id: \"2026-08-24\", count: 175}, {_id: \"2026-08-25\", count: 173}, {_id: \"2026-08-26\", count: 151}, {_id: \"2026-08-27\", count: 189}, {_id: \"2026-08-28\", count: 180}, {_id: \"2026-08-29\", count: 115}, {_id: \"2026-08-30\", count: 101}, {_id: \"2026-08-31\", count: 108}, {_id: \"2026-09-01\", count: 190}, {_id: \"2026-09-02\", count: 328}, {_id: \"2026-09-03\", count: 158}, {_id: \"2026-09-04\", count: 155}, {_id: \"2026-09-05\", count: 146}, {_id: \"2026-09-06\", count: 148}, {_id: \"2026-09-07\", count: 176}, {_id: \"2026-09-08\", count: 169}, {_id: \"2026-09-09\", count: 188}, {_id: \"2026-09-10\", count: 196}, {_id: \"2026-09-11\", count: 191}, {_id: \"2026-09-12\", count: 148}, {_id: \"2026-09-13\", count: 120}, {_id: \"2026-09-14\", count: 171}, {_id: \"2026-09-15\", count: 181}, {_id: \"2026-09-16\", count: 169}, {_id: \"2026-09-17\", count: 187}, {_id: \"2026-09-18\", count: 155}, {_id: \"2026-09-19\", count: 124}, {_id: \"2026-09-20\", count: 146}, {_id: \"2026-09-21\", count: 167}, {_id: \"2026-09-22\", count: 182}, {_id: \"2026-09-23\", count: 166}, {_id: \"2026-09-24\", count: 68}], avg_inspection_time: [{_id: null, avg: 10.4438}]}', 'code': 40228, 'codeName': 'Location40228'})); regenerated and re-ran it against MongoDB.",
+          "duration_ms": 3253
+        },
+        {
+          "name": "Answer generation",
+          "description": "Asked the language model to phrase the raw result rows as a natural-language answer, then ran deterministic safety checks (no invented values, no wrong superlatives, no dropped data).",
+          "duration_ms": 1777
+        }
+      ]
+    }
+  },
+  {
+    "id": "monthly_report_named_month",
+    "category": "reports",
+    "passed": true,
+    "reason": "ok",
+    "final": {
+      "question": "Give me a report for June",
+      "intent": "data_query",
+      "pipeline": [
+        {
+          "$match": {
+            "timestamp": {
+              "$gte": "2026-06-01T00:00:00+00:00",
+              "$lt": "2026-07-01T00:00:00+00:00"
+            },
+            "alert_type": {
+              "$ne": "NORMAL_OPERATION"
+            }
+          }
+        },
+        {
+          "$facet": {
+            "total_alerts": [
+              {
+                "$count": "total"
+              }
+            ],
+            "by_type": [
+              {
+                "$group": {
+                  "_id": "$alert_type",
+                  "count": {
+                    "$sum": 1
+                  }
+                }
+              },
+              {
+                "$sort": {
+                  "count": -1
+                }
+              }
+            ],
+            "by_month": [
+              {
+                "$group": {
+                  "_id": {
+                    "$dateToString": {
+                      "format": "%Y-%m",
+                      "date": "$timestamp"
+                    }
+                  },
+                  "count": {
+                    "$sum": 1
+                  }
+                }
+              },
+              {
+                "$sort": {
+                  "_id": 1
+                }
+              }
+            ],
+            "avg_inspection_time": [
+              {
+                "$group": {
+                  "_id": null,
+                  "avg": {
+                    "$avg": "$inspection_time"
+                  }
+                }
+              }
+            ],
+            "by_day": [
+              {
+                "$group": {
+                  "_id": {
+                    "$dateToString": {
+                      "format": "%Y-%m-%d",
+                      "date": "$timestamp"
+                    }
+                  },
+                  "count": {
+                    "$sum": 1
+                  }
+                }
+              },
+              {
+                "$sort": {
+                  "_id": 1
+                }
+              }
+            ]
+          }
+        },
+        {
+          "$limit": 1
+        }
+      ],
+      "explanation": "Report for June",
+      "result": [
+        {
+          "total_alerts": [
+            {
+              "total": 4940
+            }
+          ],
+          "by_type": [
+            {
+              "_id": "FAST_INSPECTION",
+              "count": 2282
+            },
+            {
+              "_id": "HAND_TOUCH",
+              "count": 1914
+            },
+            {
+              "_id": "MISSING_CLEANING",
+              "count": 744
+            }
+          ],
+          "avg_inspection_time": [
+            {
+              "_id": null,
+              "avg": 10.43
+            }
+          ],
+          "by_week": [
+            {
+              "week": "June Week 1 (06/01-06/07)",
+              "type": "FAST_INSPECTION",
+              "count": 544
+            },
+            {
+              "week": "June Week 1 (06/01-06/07)",
+              "type": "HAND_TOUCH",
+              "count": 444
+            },
+            {
+              "week": "June Week 1 (06/01-06/07)",
+              "type": "MISSING_CLEANING",
+              "count": 174
+            },
+            {
+              "week": "June Week 2 (06/08-06/14)",
+              "type": "FAST_INSPECTION",
+              "count": 520
+            },
+            {
+              "week": "June Week 2 (06/08-06/14)",
+              "type": "HAND_TOUCH",
+              "count": 447
+            },
+            {
+              "week": "June Week 2 (06/08-06/14)",
+              "type": "MISSING_CLEANING",
+              "count": 199
+            },
+            {
+              "week": "June Week 3 (06/15-06/21)",
+              "type": "FAST_INSPECTION",
+              "count": 511
+            },
+            {
+              "week": "June Week 3 (06/15-06/21)",
+              "type": "HAND_TOUCH",
+              "count": 439
+            },
+            {
+              "week": "June Week 3 (06/15-06/21)",
+              "type": "MISSING_CLEANING",
+              "count": 173
+            },
+            {
+              "week": "June Week 4 (06/22-06/28)",
+              "type": "FAST_INSPECTION",
+              "count": 552
+            },
+            {
+              "week": "June Week 4 (06/22-06/28)",
+              "type": "HAND_TOUCH",
+              "count": 445
+            },
+            {
+              "week": "June Week 4 (06/22-06/28)",
+              "type": "MISSING_CLEANING",
+              "count": 139
+            },
+            {
+              "week": "June Week 5 (06/29-06/30)",
+              "type": "FAST_INSPECTION",
+              "count": 155
+            },
+            {
+              "week": "June Week 5 (06/29-06/30)",
+              "type": "HAND_TOUCH",
+              "count": 139
+            },
+            {
+              "week": "June Week 5 (06/29-06/30)",
+              "type": "MISSING_CLEANING",
+              "count": 59
+            }
+          ]
+        }
+      ],
+      "row_count": 1,
+      "answer": "There were 4,940 alerts. By type, fast Inspection had 2,282 alerts, Hand Touch had 1,914 alerts, and Missing Cleaning had 744 alerts. The average was 10.43 seconds.\n\nBy week:\nJune Week 1 (06/01-06/07) \u2014 Fast Inspection: 544, Hand Touch: 444, Missing Cleaning: 174\nJune Week 2 (06/08-06/14) \u2014 Fast Inspection: 520, Hand Touch: 447, Missing Cleaning: 199\nJune Week 3 (06/15-06/21) \u2014 Fast Inspection: 511, Hand Touch: 439, Missing Cleaning: 173\nJune Week 4 (06/22-06/28) \u2014 Fast Inspection: 552, Hand Touch: 445, Missing Cleaning: 139\nJune Week 5 (06/29-06/30) \u2014 Fast Inspection: 155, Hand Touch: 139, Missing Cleaning: 59",
+      "stages": [
+        {
+          "name": "Query generation",
+          "description": "Asked the language model to translate the question into a MongoDB aggregation pipeline (includes JSON-syntax repair and structural validation of the result).",
+          "duration_ms": 6174
+        },
+        {
+          "name": "Database execution",
+          "description": "Ran the generated pipeline against MongoDB.",
+          "duration_ms": 11
+        },
+        {
+          "name": "Answer generation",
+          "description": "Asked the language model to phrase the raw result rows as a natural-language answer, then ran deterministic safety checks (no invented values, no wrong superlatives, no dropped data).",
+          "duration_ms": 1067
+        }
+      ]
+    }
+  },
+  {
+    "id": "day_wise_report",
+    "category": "reports",
+    "passed": true,
+    "reason": "ok",
+    "final": {
+      "question": "Give me a day wise report for this month",
+      "intent": "data_query",
+      "pipeline": [
+        {
+          "$match": {
+            "alert_type": {
+              "$ne": "NORMAL_OPERATION"
+            },
+            "timestamp": {
+              "$gte": "2026-09-01T00:00:00+00:00",
+              "$lt": "2026-09-26T00:00:00+00:00"
+            }
+          }
+        },
+        {
+          "$facet": {
+            "by_day": [
+              {
+                "$group": {
+                  "_id": {
+                    "$dateToString": {
+                      "format": "%Y-%m-%d",
+                      "date": "$timestamp"
+                    }
+                  },
+                  "count": {
+                    "$sum": 1
+                  }
+                }
+              },
+              {
+                "$sort": {
+                  "_id": 1
+                }
+              },
+              {
+                "$limit": 1
+              }
+            ],
+            "total_alerts": [
+              {
+                "$count": "total"
+              }
+            ],
+            "by_type": [
+              {
+                "$group": {
+                  "_id": "$alert_type",
+                  "count": {
+                    "$sum": 1
+                  }
+                }
+              },
+              {
+                "$sort": {
+                  "count": -1
+                }
+              }
+            ],
+            "by_month": [
+              {
+                "$group": {
+                  "_id": {
+                    "$dateToString": {
+                      "format": "%Y-%m",
+                      "date": "$timestamp"
+                    }
+                  },
+                  "count": {
+                    "$sum": 1
+                  }
+                }
+              },
+              {
+                "$sort": {
+                  "_id": 1
+                }
+              }
+            ],
+            "avg_inspection_time": [
+              {
+                "$group": {
+                  "_id": null,
+                  "avg": {
+                    "$avg": "$inspection_time"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "explanation": "Day wise report for this month",
+      "result": [
+        {
+          "total_alerts": [
+            {
+              "total": 4029
+            }
+          ],
+          "by_type": [
+            {
+              "_id": "FAST_INSPECTION",
+              "count": 1940
+            },
+            {
+              "_id": "HAND_TOUCH",
+              "count": 1507
+            },
+            {
+              "_id": "MISSING_CLEANING",
+              "count": 582
+            }
+          ],
+          "avg_inspection_time": [
+            {
+              "_id": null,
+              "avg": 10.22
+            }
+          ],
+          "by_week": [
+            {
+              "week": "September Week 1 (09/01-09/07)",
+              "type": "FAST_INSPECTION",
+              "count": 691
+            },
+            {
+              "week": "September Week 1 (09/01-09/07)",
+              "type": "HAND_TOUCH",
+              "count": 442
+            },
+            {
+              "week": "September Week 1 (09/01-09/07)",
+              "type": "MISSING_CLEANING",
+              "count": 168
+            },
+            {
+              "week": "September Week 2 (09/08-09/14)",
+              "type": "FAST_INSPECTION",
+              "count": 543
+            },
+            {
+              "week": "September Week 2 (09/08-09/14)",
+              "type": "HAND_TOUCH",
+              "count": 480
+            },
+            {
+              "week": "September Week 2 (09/08-09/14)",
+              "type": "MISSING_CLEANING",
+              "count": 160
+            },
+            {
+              "week": "September Week 3 (09/15-09/21)",
+              "type": "FAST_INSPECTION",
+              "count": 532
+            },
+            {
+              "week": "September Week 3 (09/15-09/21)",
+              "type": "HAND_TOUCH",
+              "count": 432
+            },
+            {
+              "week": "September Week 3 (09/15-09/21)",
+              "type": "MISSING_CLEANING",
+              "count": 165
+            },
+            {
+              "week": "September Week 4 (09/22-09/28)",
+              "type": "FAST_INSPECTION",
+              "count": 174
+            },
+            {
+              "week": "September Week 4 (09/22-09/28)",
+              "type": "HAND_TOUCH",
+              "count": 153
+            },
+            {
+              "week": "September Week 4 (09/22-09/28)",
+              "type": "MISSING_CLEANING",
+              "count": 89
+            }
+          ]
+        }
+      ],
+      "row_count": 1,
+      "answer": "There were 4,029 alerts. By type, fast Inspection had 1,940 alerts, Hand Touch had 1,507 alerts, and Missing Cleaning had 582 alerts. The average was 10.22 seconds.\n\nBy week:\nSeptember Week 1 (09/01-09/07) \u2014 Fast Inspection: 691, Hand Touch: 442, Missing Cleaning: 168\nSeptember Week 2 (09/08-09/14) \u2014 Fast Inspection: 543, Hand Touch: 480, Missing Cleaning: 160\nSeptember Week 3 (09/15-09/21) \u2014 Fast Inspection: 532, Hand Touch: 432, Missing Cleaning: 165\nSeptember Week 4 (09/22-09/28) \u2014 Fast Inspection: 174, Hand Touch: 153, Missing Cleaning: 89",
+      "stages": [
+        {
+          "name": "Query generation",
+          "description": "Asked the language model to translate the question into a MongoDB aggregation pipeline (includes JSON-syntax repair and structural validation of the result).",
+          "duration_ms": 2949
+        },
+        {
+          "name": "Database execution",
+          "description": "Ran the generated pipeline against MongoDB.",
+          "duration_ms": 9
+        },
+        {
+          "name": "Answer generation",
+          "description": "Asked the language model to phrase the raw result rows as a natural-language answer, then ran deterministic safety checks (no invented values, no wrong superlatives, no dropped data).",
+          "duration_ms": 1751
+        }
+      ]
+    }
+  },
+  {
+    "id": "followup_count_then_breakdown",
+    "category": "follow_ups",
+    "passed": true,
+    "reason": "ok",
+    "final": {
+      "question": "Now break that down by day",
+      "intent": "data_query",
+      "pipeline": [
+        {
+          "$match": {
+            "alert_type": {
+              "$ne": "NORMAL_OPERATION"
+            },
+            "timestamp": {
+              "$gte": "2026-09-21T00:00:00+00:00",
+              "$lt": "2026-09-26T00:00:00+00:00"
+            }
+          }
+        },
+        {
+          "$group": {
+            "_id": {
+              "$dateToString": {
+                "format": "%Y-%m-%d",
+                "date": "$timestamp"
+              }
+            },
+            "count": {
+              "$sum": 1
+            }
+          }
+        },
+        {
+          "$sort": {
+            "count": -1
+          }
+        }
+      ],
+      "explanation": "Break down hand touch alerts by day this week",
+      "result": [
+        {
+          "_id": "2026-09-22",
+          "count": 182
+        },
+        {
+          "_id": "2026-09-21",
+          "count": 167
+        },
+        {
+          "_id": "2026-09-23",
+          "count": 166
+        },
+        {
+          "_id": "2026-09-24",
+          "count": 68
+        }
+      ],
+      "row_count": 4,
+      "answer": "182 alerts on 2026-09-22 (Tuesday), 167 alerts on 2026-09-21 (Monday), 166 alerts on 2026-09-23 (Wednesday), and 68 alerts on 2026-09-24 (Thursday). (using the same time period as your last question: Sep 21, 2026 to Sep 26, 2026)",
+      "stages": [
+        {
+          "name": "Query generation",
+          "description": "Asked the language model to translate the question into a MongoDB aggregation pipeline (includes JSON-syntax repair and structural validation of the result).",
+          "duration_ms": 1700
+        },
+        {
+          "name": "Database execution",
+          "description": "Ran the generated pipeline against MongoDB.",
+          "duration_ms": 1
+        },
+        {
+          "name": "Answer generation",
+          "description": "Asked the language model to phrase the raw result rows as a natural-language answer, then ran deterministic safety checks (no invented values, no wrong superlatives, no dropped data).",
+          "duration_ms": 867
+        }
+      ]
+    }
+  },
+  {
+    "id": "followup_report_then_narrow",
+    "category": "follow_ups",
+    "passed": true,
+    "reason": "ok",
+    "final": {
+      "question": "Just show me the by_type part again but for last month instead",
+      "intent": "data_query",
+      "pipeline": [
+        {
+          "$match": {
+            "alert_type": {
+              "$ne": "NORMAL_OPERATION"
+            },
+            "timestamp": {
+              "$gte": "2026-08-01T00:00:00+00:00",
+              "$lt": "2026-09-01T00:00:00+00:00"
+            }
+          }
+        },
+        {
+          "$facet": {
+            "by_type": [
+              {
+                "$group": {
+                  "_id": "$alert_type",
+                  "count": {
+                    "$sum": 1
+                  }
+                }
+              },
+              {
+                "$sort": {
+                  "count": -1
+                }
+              }
+            ],
+            "total_alerts": [
+              {
+                "$count": "total"
+              }
+            ],
+            "avg_inspection_time": [
+              {
+                "$group": {
+                  "_id": null,
+                  "avg": {
+                    "$avg": "$inspection_time"
+                  }
+                }
+              }
+            ],
+            "by_month": [
+              {
+                "$group": {
+                  "_id": {
+                    "$dateToString": {
+                      "format": "%Y-%m",
+                      "date": "$timestamp"
+                    }
+                  },
+                  "count": {
+                    "$sum": 1
+                  }
+                }
+              },
+              {
+                "$sort": {
+                  "_id": 1
+                }
+              }
+            ],
+            "by_day": [
+              {
+                "$group": {
+                  "_id": {
+                    "$dateToString": {
+                      "format": "%Y-%m-%d",
+                      "date": "$timestamp"
+                    }
+                  },
+                  "count": {
+                    "$sum": 1
+                  }
+                }
+              },
+              {
+                "$sort": {
+                  "_id": 1
+                }
+              }
+            ]
+          }
+        },
+        {
+          "$unwind": "$by_type"
+        },
+        {
+          "$limit": 2
+        }
+      ],
+      "explanation": "Show the breakdown by type for last month's alerts",
+      "result": [
+        {
+          "by_type": {
+            "_id": "FAST_INSPECTION",
+            "count": 2225
+          },
+          "total_alerts": [
+            {
+              "total": 4914
+            }
+          ],
+          "avg_inspection_time": [
+            {
+              "_id": null,
+              "avg": 10.63
+            }
+          ],
+          "by_month": [
+            {
+              "_id": "2026-08",
+              "count": 4914
+            }
+          ],
+          "by_day": [
+            {
+              "_id": "2026-08-01",
+              "count": 105
+            },
+            {
+              "_id": "2026-08-02",
+              "count": 138
+            },
+            {
+              "_id": "2026-08-03",
+              "count": 154
+            },
+            {
+              "_id": "2026-08-04",
+              "count": 185
+            },
+            {
+              "_id": "2026-08-05",
+              "count": 153
+            },
+            {
+              "_id": "2026-08-06",
+              "count": 195
+            },
+            {
+              "_id": "2026-08-07",
+              "count": 176
+            },
+            {
+              "_id": "2026-08-08",
+              "count": 124
+            },
+            {
+              "_id": "2026-08-09",
+              "count": 106
+            },
+            {
+              "_id": "2026-08-10",
+              "count": 194
+            },
+            {
+              "_id": "2026-08-11",
+              "count": 164
+            },
+            {
+              "_id": "2026-08-12",
+              "count": 194
+            },
+            {
+              "_id": "2026-08-13",
+              "count": 193
+            },
+            {
+              "_id": "2026-08-14",
+              "count": 171
+            },
+            {
+              "_id": "2026-08-15",
+              "count": 148
+            },
+            {
+              "_id": "2026-08-16",
+              "count": 147
+            },
+            {
+              "_id": "2026-08-17",
+              "count": 194
+            },
+            {
+              "_id": "2026-08-18",
+              "count": 192
+            },
+            {
+              "_id": "2026-08-19",
+              "count": 152
+            },
+            {
+              "_id": "2026-08-20",
+              "count": 176
+            },
+            {
+              "_id": "2026-08-21",
+              "count": 189
+            },
+            {
+              "_id": "2026-08-22",
+              "count": 128
+            },
+            {
+              "_id": "2026-08-23",
+              "count": 144
+            },
+            {
+              "_id": "2026-08-24",
+              "count": 175
+            },
+            {
+              "_id": "2026-08-25",
+              "count": 173
+            },
+            {
+              "_id": "2026-08-26",
+              "count": 151
+            },
+            {
+              "_id": "2026-08-27",
+              "count": 189
+            },
+            {
+              "_id": "2026-08-28",
+              "count": 180
+            },
+            {
+              "_id": "2026-08-29",
+              "count": 115
+            },
+            {
+              "_id": "2026-08-30",
+              "count": 101
+            },
+            {
+              "_id": "2026-08-31",
+              "count": 108
+            }
+          ]
+        },
+        {
+          "by_type": {
+            "_id": "HAND_TOUCH",
+            "count": 1968
+          },
+          "total_alerts": [
+            {
+              "total": 4914
+            }
+          ],
+          "avg_inspection_time": [
+            {
+              "_id": null,
+              "avg": 10.63
+            }
+          ],
+          "by_month": [
+            {
+              "_id": "2026-08",
+              "count": 4914
+            }
+          ],
+          "by_day": [
+            {
+              "_id": "2026-08-01",
+              "count": 105
+            },
+            {
+              "_id": "2026-08-02",
+              "count": 138
+            },
+            {
+              "_id": "2026-08-03",
+              "count": 154
+            },
+            {
+              "_id": "2026-08-04",
+              "count": 185
+            },
+            {
+              "_id": "2026-08-05",
+              "count": 153
+            },
+            {
+              "_id": "2026-08-06",
+              "count": 195
+            },
+            {
+              "_id": "2026-08-07",
+              "count": 176
+            },
+            {
+              "_id": "2026-08-08",
+              "count": 124
+            },
+            {
+              "_id": "2026-08-09",
+              "count": 106
+            },
+            {
+              "_id": "2026-08-10",
+              "count": 194
+            },
+            {
+              "_id": "2026-08-11",
+              "count": 164
+            },
+            {
+              "_id": "2026-08-12",
+              "count": 194
+            },
+            {
+              "_id": "2026-08-13",
+              "count": 193
+            },
+            {
+              "_id": "2026-08-14",
+              "count": 171
+            },
+            {
+              "_id": "2026-08-15",
+              "count": 148
+            },
+            {
+              "_id": "2026-08-16",
+              "count": 147
+            },
+            {
+              "_id": "2026-08-17",
+              "count": 194
+            },
+            {
+              "_id": "2026-08-18",
+              "count": 192
+            },
+            {
+              "_id": "2026-08-19",
+              "count": 152
+            },
+            {
+              "_id": "2026-08-20",
+              "count": 176
+            },
+            {
+              "_id": "2026-08-21",
+              "count": 189
+            },
+            {
+              "_id": "2026-08-22",
+              "count": 128
+            },
+            {
+              "_id": "2026-08-23",
+              "count": 144
+            },
+            {
+              "_id": "2026-08-24",
+              "count": 175
+            },
+            {
+              "_id": "2026-08-25",
+              "count": 173
+            },
+            {
+              "_id": "2026-08-26",
+              "count": 151
+            },
+            {
+              "_id": "2026-08-27",
+              "count": 189
+            },
+            {
+              "_id": "2026-08-28",
+              "count": 180
+            },
+            {
+              "_id": "2026-08-29",
+              "count": 115
+            },
+            {
+              "_id": "2026-08-30",
+              "count": 101
+            },
+            {
+              "_id": "2026-08-31",
+              "count": 108
+            }
+          ]
+        }
+      ],
+      "row_count": 2,
+      "answer": "The by_type breakdown for last month is as follows: there were 2225 fast inspection alerts and 1968 hand touch alerts recorded.",
+      "stages": [
+        {
+          "name": "Query generation",
+          "description": "Asked the language model to translate the question into a MongoDB aggregation pipeline (includes JSON-syntax repair and structural validation of the result).",
+          "duration_ms": 2306
+        },
+        {
+          "name": "Database execution",
+          "description": "Ran the generated pipeline against MongoDB.",
+          "duration_ms": 8
+        },
+        {
+          "name": "Answer generation",
+          "description": "Asked the language model to phrase the raw result rows as a natural-language answer, then ran deterministic safety checks (no invented values, no wrong superlatives, no dropped data).",
+          "duration_ms": 506
+        }
+      ]
+    }
+  },
+  {
+    "id": "followup_chain_3_turns",
+    "category": "follow_ups",
+    "passed": false,
+    "reason": "empty result on final turn",
+    "final": {
+      "question": "Which of those had the highest average inspection time?",
+      "intent": "data_query",
+      "pipeline": [
+        {
+          "$match": {
+            "timestamp": {
+              "$gte": "2026-09-25T00:00:00+00:00",
+              "$lt": "2026-09-26T00:00:00+00:00"
+            },
+            "alert_type": {
+              "$ne": "NORMAL_OPERATION"
+            }
+          }
+        },
+        {
+          "$group": {
+            "_id": "$alert_type",
+            "avg_inspection_time": {
+              "$avg": "$inspection_time"
+            }
+          }
+        },
+        {
+          "$sort": {
+            "avg_inspection_time": -1
+          }
+        },
+        {
+          "$limit": 1
+        }
+      ],
+      "explanation": "Find the alert type with the highest average inspection time",
+      "result": [],
+      "row_count": 0,
+      "answer": "No matching data found for that. (using the same time period as your last question: Sep 25, 2026 to Sep 26, 2026)",
+      "stages": [
+        {
+          "name": "Query generation",
+          "description": "Asked the language model to translate the question into a MongoDB aggregation pipeline (includes JSON-syntax repair and structural validation of the result).",
+          "duration_ms": 1332
+        },
+        {
+          "name": "Database execution",
+          "description": "Ran the generated pipeline against MongoDB.",
+          "duration_ms": 1
+        },
+        {
+          "name": "Answer generation",
+          "description": "Asked the language model to phrase the raw result rows as a natural-language answer, then ran deterministic safety checks (no invented values, no wrong superlatives, no dropped data).",
+          "duration_ms": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "followup_peak_hour_then_day",
+    "category": "follow_ups",
+    "passed": true,
+    "reason": "ok",
+    "final": {
+      "question": "Which day had the most instead?",
+      "intent": "data_query",
+      "pipeline": [
+        {
+          "$match": {
+            "alert_type": {
+              "$ne": "NORMAL_OPERATION"
+            }
+          }
+        },
+        {
+          "$group": {
+            "_id": {
+              "date": {
+                "$dateToString": {
+                  "format": "%Y-%m-%d",
+                  "date": "$timestamp"
+                }
+              }
+            },
+            "count": {
+              "$sum": 1
+            }
+          }
+        },
+        {
+          "$sort": {
+            "count": -1
+          }
+        },
+        {
+          "$limit": 1
+        }
+      ],
+      "explanation": "Find the day with the most missing cleaning alerts",
+      "result": [
+        {
+          "count": 416,
+          "date": "2025-03-21"
+        }
+      ],
+      "row_count": 1,
+      "answer": "The day with the most instead was 2025-03-21, a Friday, where 416 insteads were recorded.",
+      "stages": [
+        {
+          "name": "Query generation",
+          "description": "Asked the language model to translate the question into a MongoDB aggregation pipeline (includes JSON-syntax repair and structural validation of the result).",
+          "duration_ms": 1174
+        },
+        {
+          "name": "Database execution",
+          "description": "Ran the generated pipeline against MongoDB.",
+          "duration_ms": 105
+        },
+        {
+          "name": "Answer generation",
+          "description": "Asked the language model to phrase the raw result rows as a natural-language answer, then ran deterministic safety checks (no invented values, no wrong superlatives, no dropped data).",
+          "duration_ms": 293
+        }
+      ]
+    }
+  },
+  {
+    "id": "followup_greeting_then_question",
+    "category": "follow_ups",
+    "passed": true,
+    "reason": "ok",
+    "final": {
+      "question": "How many alerts happened today?",
+      "intent": "data_query",
+      "pipeline": [
+        {
+          "$match": {
+            "timestamp": {
+              "$gte": "2026-09-25T00:00:00+00:00",
+              "$lt": "2026-09-26T00:00:00+00:00"
+            },
+            "alert_type": {
+              "$ne": "NORMAL_OPERATION"
+            }
+          }
+        },
+        {
+          "$count": "total"
+        }
+      ],
+      "explanation": "How many alerts happened today?",
+      "result": [],
+      "row_count": 0,
+      "answer": "No matching data found for that.",
+      "stages": [
+        {
+          "name": "Query generation",
+          "description": "Asked the language model to translate the question into a MongoDB aggregation pipeline (includes JSON-syntax repair and structural validation of the result).",
+          "duration_ms": 1058
+        },
+        {
+          "name": "Database execution",
+          "description": "Ran the generated pipeline against MongoDB.",
+          "duration_ms": 1
+        },
+        {
+          "name": "Answer generation",
+          "description": "Asked the language model to phrase the raw result rows as a natural-language answer, then ran deterministic safety checks (no invented values, no wrong superlatives, no dropped data).",
+          "duration_ms": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "last_15_minutes",
+    "category": "edge_cases",
+    "passed": true,
+    "reason": "ok",
+    "final": {
+      "question": "How many alerts happened in the last 15 minutes?",
+      "intent": "data_query",
+      "pipeline": [
+        {
+          "$match": {
+            "timestamp": {
+              "$gte": "2026-09-25T05:08:24.313811+00:00",
+              "$lt": "2026-09-25T05:23:24.313811+00:00"
+            },
+            "alert_type": {
+              "$ne": "NORMAL_OPERATION"
+            }
+          }
+        },
+        {
+          "$count": "total"
+        }
+      ],
+      "explanation": "How many alerts happened in the last 15 minutes",
+      "result": [],
+      "row_count": 0,
+      "answer": "No matching data found for that.",
+      "stages": [
+        {
+          "name": "Query generation",
+          "description": "Asked the language model to translate the question into a MongoDB aggregation pipeline (includes JSON-syntax repair and structural validation of the result).",
+          "duration_ms": 848
+        },
+        {
+          "name": "Database execution",
+          "description": "Ran the generated pipeline against MongoDB.",
+          "duration_ms": 1
+        },
+        {
+          "name": "Answer generation",
+          "description": "Asked the language model to phrase the raw result rows as a natural-language answer, then ran deterministic safety checks (no invented values, no wrong superlatives, no dropped data).",
+          "duration_ms": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "last_hour",
+    "category": "edge_cases",
+    "passed": true,
+    "reason": "ok",
+    "final": {
+      "question": "How many alerts happened in the last hour?",
+      "intent": "data_query",
+      "pipeline": [
+        {
+          "$match": {
+            "alert_type": {
+              "$ne": "NORMAL_OPERATION"
+            },
+            "timestamp": {
+              "$gte": "2026-09-25T04:23:25.160911+00:00",
+              "$lt": "2026-09-25T05:23:25.160911+00:00"
+            }
+          }
+        },
+        {
+          "$count": "total"
+        }
+      ],
+      "explanation": "How many alerts happened in the last hour",
+      "result": [],
+      "row_count": 0,
+      "answer": "No matching data found for that.",
+      "stages": [
+        {
+          "name": "Query generation",
+          "description": "Asked the language model to translate the question into a MongoDB aggregation pipeline (includes JSON-syntax repair and structural validation of the result).",
+          "duration_ms": 844
+        },
+        {
+          "name": "Database execution",
+          "description": "Ran the generated pipeline against MongoDB.",
+          "duration_ms": 1
+        },
+        {
+          "name": "Answer generation",
+          "description": "Asked the language model to phrase the raw result rows as a natural-language answer, then ran deterministic safety checks (no invented values, no wrong superlatives, no dropped data).",
+          "duration_ms": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "longest_inspection_time",
+    "category": "edge_cases",
+    "passed": true,
+    "reason": "ok",
+    "final": {
+      "question": "What's the single longest inspection time on record?",
+      "intent": "data_query",
+      "pipeline": [
+        {
+          "$match": {
+            "alert_type": {
+              "$ne": "NORMAL_OPERATION"
+            }
+          }
+        },
+        {
+          "$sort": {
+            "inspection_time": -1
+          }
+        },
+        {
+          "$limit": 1
+        }
+      ],
+      "explanation": "Find the longest inspection time in all non-normal operation alerts",
+      "result": [
+        {
+          "_id": "6a9538be3574a12e60c3550f",
+          "alert_type": "HAND_TOUCH",
+          "inspection_time": 30.0,
+          "objects_present": [
+            "workstation",
+            "person"
+          ],
+          "cloth_detected": false,
+          "narration_en": "Panel touched without protection. Please use cleaning cloth.",
+          "narration_ta": "\u0baa\u0bbe\u0ba4\u0bc1\u0b95\u0bbe\u0baa\u0bcd\u0baa\u0bbf\u0bb2\u0bcd\u0bb2\u0bbe\u0bae \u0baa\u0bc7\u0ba9\u0bb2\u0bcd \u0b9f\u0b9a\u0bcd \u0baa\u0ba3\u0bcd\u0ba3\u0baa\u0bcd\u0baa\u0b9f\u0bcd\u0b9f\u0bc1\u0bb0\u0bc1\u0b95\u0bcd\u0b95\u0bc1. \u0b95\u0bcd\u0bb3\u0bc0\u0ba9\u0bbf\u0b99\u0bcd \u0b95\u0bbf\u0bb3\u0bbe\u0ba4\u0bcd\u0ba4\u0bc1 \u0baa\u0baf\u0ba9\u0bcd\u0baa\u0b9f\u0bc1\u0ba4\u0bcd\u0ba4\u0bc1\u0b99\u0bcd\u0b95.",
+          "zone": "FQC Station 1",
+          "timestamp": "2021-09-15T14:02:36",
+          "hour": 14
+        }
+      ],
+      "row_count": 1,
+      "answer": "The longest inspection time on record was 30 seconds, which occurred at FQC Station 1 on 2021-09-15 (Wednesday), around 2pm.",
+      "stages": [
+        {
+          "name": "Query generation",
+          "description": "Asked the language model to translate the question into a MongoDB aggregation pipeline (includes JSON-syntax repair and structural validation of the result).",
+          "duration_ms": 650
+        },
+        {
+          "name": "Database execution",
+          "description": "Ran the generated pipeline against MongoDB.",
+          "duration_ms": 164
+        },
+        {
+          "name": "Answer generation",
+          "description": "Asked the language model to phrase the raw result rows as a natural-language answer, then ran deterministic safety checks (no invented values, no wrong superlatives, no dropped data).",
+          "duration_ms": 355
+        }
+      ]
+    }
+  },
+  {
+    "id": "threshold_over_30s",
+    "category": "edge_cases",
+    "passed": true,
+    "reason": "ok",
+    "final": {
+      "question": "How many hand touch alerts took longer than 30 seconds to inspect?",
+      "intent": "data_query",
+      "pipeline": [
+        {
+          "$match": {
+            "alert_type": "HAND_TOUCH",
+            "inspection_time": {
+              "$gt": 30
+            }
+          }
+        },
+        {
+          "$count": "total"
+        }
+      ],
+      "explanation": "How many hand touch alerts took longer than 30 seconds to inspection",
+      "result": [],
+      "row_count": 0,
+      "answer": "No matching data found for that.",
+      "stages": [
+        {
+          "name": "Query generation",
+          "description": "Asked the language model to translate the question into a MongoDB aggregation pipeline (includes JSON-syntax repair and structural validation of the result).",
+          "duration_ms": 943
+        },
+        {
+          "name": "Database execution",
+          "description": "Ran the generated pipeline against MongoDB.",
+          "duration_ms": 49
+        },
+        {
+          "name": "Answer generation",
+          "description": "Asked the language model to phrase the raw result rows as a natural-language answer, then ran deterministic safety checks (no invented values, no wrong superlatives, no dropped data).",
+          "duration_ms": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "gibberish_unsupported",
+    "category": "edge_cases",
+    "passed": true,
+    "reason": "ok",
+    "final": {
+      "question": "asdkjfh qwerty banana",
+      "intent": "unsupported",
+      "pipeline": null,
+      "explanation": null,
+      "result": [],
+      "row_count": 0,
+      "answer": "I can only answer questions about the alert log \u2014 this data has alert_type, zone, cloth_detected, inspection_time, and timestamp for each alert. Could you rephrase your question in those terms?",
+      "stages": [
+        {
+          "name": "Query generation",
+          "description": "Asked the language model to translate the question into a MongoDB aggregation pipeline (includes JSON-syntax repair and structural validation of the result).",
+          "duration_ms": 352
+        },
+        {
+          "name": "Database execution",
+          "description": "Ran the generated pipeline against MongoDB.",
+          "duration_ms": 0
+        },
+        {
+          "name": "Answer generation",
+          "description": "Asked the language model to phrase the raw result rows as a natural-language answer, then ran deterministic safety checks (no invented values, no wrong superlatives, no dropped data).",
+          "duration_ms": 0
+        }
+      ]
+    }
+  },
+  {
+    "id": "greeting_only",
+    "category": "edge_cases",
+    "passed": true,
+    "reason": "ok",
+    "final": {
+      "question": "hello!",
+      "intent": "greeting",
+      "pipeline": null,
+      "explanation": null,
+      "result": [],
+      "row_count": 0,
+      "answer": "Hello! I'm your factory safety alert assistant \u2014 ask me anything about the alert log: counts, trends, breakdowns, top days, even a full report. E.g. \"which day had the most hand touch alerts?\" or \"give me a quarterly report\".",
+      "stages": [
+        {
+          "name": "Query generation",
+          "description": "Asked the language model to translate the question into a MongoDB aggregation pipeline (includes JSON-syntax repair and structural validation of the result).",
+          "duration_ms": 0
+        },
+        {
+          "name": "Database execution",
+          "description": "Ran the generated pipeline against MongoDB.",
+          "duration_ms": 0
+        },
+        {
+          "name": "Answer generation",
+          "description": "Asked the language model to phrase the raw result rows as a natural-language answer, then ran deterministic safety checks (no invented values, no wrong superlatives, no dropped data).",
+          "duration_ms": 0
+        }
+      ]
+    }
+  }
+]

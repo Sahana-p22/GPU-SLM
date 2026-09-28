@@ -1,0 +1,162 @@
+{
+  "tier": "medium",
+  "duration_s": 13.2,
+  "results": {
+    "unit_sanity": [
+      {
+        "file": "sanity_bare_expr_and_unsupported_retry.py",
+        "status": "PASS",
+        "pass": 9,
+        "fail": 0,
+        "duration_s": 0.6
+      },
+      {
+        "file": "sanity_count_target_ranking_shape.py",
+        "status": "PASS",
+        "pass": 11,
+        "fail": 0,
+        "duration_s": 0.6
+      },
+      {
+        "file": "sanity_date_and_facet.py",
+        "status": "PASS",
+        "pass": 15,
+        "fail": 0,
+        "duration_s": 0.6
+      },
+      {
+        "file": "sanity_date_count_search_carryover.py",
+        "status": "PASS",
+        "pass": 20,
+        "fail": 0,
+        "duration_s": 0.6
+      },
+      {
+        "file": "sanity_date_phrase_synonyms.py",
+        "status": "PASS",
+        "pass": 72,
+        "fail": 0,
+        "duration_s": 0.6
+      },
+      {
+        "file": "sanity_distinct_and_labels.py",
+        "status": "PASS",
+        "pass": 9,
+        "fail": 0,
+        "duration_s": 0.6
+      },
+      {
+        "file": "sanity_facet_junk_and_accumulators.py",
+        "status": "PASS",
+        "pass": 15,
+        "fail": 0,
+        "duration_s": 0.6
+      },
+      {
+        "file": "sanity_fqc_bugfixes_pipeline_shape.py",
+        "status": "PASS",
+        "pass": 19,
+        "fail": 0,
+        "duration_s": 0.6
+      },
+      {
+        "file": "sanity_fqc_numeric_comparison.py",
+        "status": "PASS",
+        "pass": 12,
+        "fail": 0,
+        "duration_s": 0.6
+      },
+      {
+        "file": "sanity_fqc_report_sections.py",
+        "status": "PASS",
+        "pass": 8,
+        "fail": 0,
+        "duration_s": 0.6
+      },
+      {
+        "file": "sanity_history_overflow_and_month_abbrev.py",
+        "status": "PASS",
+        "pass": 13,
+        "fail": 0,
+        "duration_s": 0.6
+      },
+      {
+        "file": "sanity_hour_range_phrasing.py",
+        "status": "PASS",
+        "pass": 65,
+        "fail": 0,
+        "duration_s": 0.6
+      },
+      {
+        "file": "sanity_pipeline_repairs.py",
+        "status": "PASS",
+        "pass": 22,
+        "fail": 0,
+        "duration_s": 0.6
+      },
+      {
+        "file": "sanity_post_facet_group.py",
+        "status": "PASS",
+        "pass": 9,
+        "fail": 0,
+        "duration_s": 0.6
+      },
+      {
+        "file": "sanity_post_facet_stages.py",
+        "status": "PASS",
+        "pass": 18,
+        "fail": 0,
+        "duration_s": 0.6
+      },
+      {
+        "file": "sanity_pregroup_limit_and_avg_fastpath.py",
+        "status": "PASS",
+        "pass": 7,
+        "fail": 0,
+        "duration_s": 0.6
+      },
+      {
+        "file": "sanity_progstyle_dates.py",
+        "status": "PASS",
+        "pass": 14,
+        "fail": 0,
+        "duration_s": 0.6
+      },
+      {
+        "file": "sanity_relative_number_overflow.py",
+        "status": "PASS",
+        "pass": 17,
+        "fail": 0,
+        "duration_s": 0.6
+      },
+      {
+        "file": "sanity_report_sections.py",
+        "status": "PASS",
+        "pass": 14,
+        "fail": 0,
+        "duration_s": 0.6
+      },
+      {
+        "file": "sanity_tomorrow_and_bare_date.py",
+        "status": "PASS",
+        "pass": 12,
+        "fail": 0,
+        "duration_s": 0.6
+      },
+      {
+        "file": "sanity_typo_tolerance.py",
+        "status": "PASS",
+        "pass": 19,
+        "fail": 0,
+        "duration_s": 0.6
+      },
+      {
+        "file": "sanity_zone_and_hour_index.py",
+        "status": "PASS",
+        "pass": 18,
+        "fail": 0,
+        "duration_s": 0.6
+      }
+    ]
+  }
+}
